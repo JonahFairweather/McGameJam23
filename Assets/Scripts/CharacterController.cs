@@ -228,7 +228,8 @@ public class CharacterController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        Debug.Log("Dashing");
+        
+        
         if (_animator)
         {
             _animator.SetBool("Sliding", true);
