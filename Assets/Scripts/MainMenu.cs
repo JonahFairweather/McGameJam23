@@ -12,8 +12,8 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        howToPlayScreen.SetActive(false);
-        settingsScreen.SetActive(false);
+        this.howToPlayScreen.SetActive(false);
+        this.settingsScreen.SetActive(false);
     }
 
     // Update is called once per frame
