@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
     private void OnEnable()
     {
         CurrentHealth = InitialHealth;
-        _isDead = CurrentHealth > 0;
+        _isDead = CurrentHealth < 0;
     }
     
     
@@ -27,10 +27,13 @@ public class Health : MonoBehaviour
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth - DmgAmt, 0, MaxHealth);
         CheckIfDead();
+        
         if (!_isDead)
         {
+            
             _knockback.TakeKnockback(gameObject.transform.position - instigator.transform.position, DmgAmt);
         }
+        
     }
 
     private void CheckIfDead()
