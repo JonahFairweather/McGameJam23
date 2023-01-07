@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2384172929500873947}
   - component: {fileID: 3393097894611355309}
   - component: {fileID: -2374131533228744775}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Snowball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c889877d4e4364a7ab976e5771bfe327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Velocity: 10
+  LayersToIgnore:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!58 &3393097894611355309
 CircleCollider2D:
   m_ObjectHideFlags: 0

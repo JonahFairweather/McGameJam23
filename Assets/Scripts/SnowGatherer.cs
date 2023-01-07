@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking.PlayerConnection;
+using UnityEngine.UIElements;
 
 public class SnowGatherer : MonoBehaviour
 {
@@ -14,6 +16,11 @@ public class SnowGatherer : MonoBehaviour
 
     [Header("ThrowingStuffs")] [SerializeField]
     private float CooldownTime;
+
+    [SerializeField] private float MaxAngle = 45f;
+    [SerializeField] private Transform SpawnLocation;
+    [SerializeField] private Snowball SnowballToSpawn;
+    
 
     protected CharacterController _character;
     protected float _cooldown;
@@ -32,7 +39,36 @@ public class SnowGatherer : MonoBehaviour
 
     public void Throw()
     {
-        
+        if(CurrentSnowballs <=0) return;
+        if (SnowballToSpawn != null)
+        {
+            
+            Snowball s = Instantiate<Snowball>(SnowballToSpawn, (SpawnLocation.position - this.gameObject.transform.position)/2 + this.gameObject.transform.position, Quaternion.identity);
+            s.AddObjectToIgnore(this.gameObject);
+            if (s != null)
+            {
+                Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - SpawnLocation.position;
+                dir.z = 0;
+                float angle = Vector3.Angle(dir.normalized, SpawnLocation.localPosition);
+                if (angle > MaxAngle)
+                {
+                    Destroy(s.gameObject);
+                    Debug.Log("Angle too large: " + angle);
+                    Debug.Log(dir.normalized.ToString() + " " + SpawnLocation.localPosition.normalized.ToString());
+                    return;
+                }
+                if (dir.magnitude > 1)
+                {
+                    s.SetVelocity(dir);
+                    _cooldown = CooldownTime;
+                    CurrentSnowballs -= 1;
+                }
+                else
+                {
+                    Destroy(s.gameObject);
+                }
+            }
+        }
     }
 
     public void GatherSnow()
@@ -56,6 +92,14 @@ public class SnowGatherer : MonoBehaviour
         IncreaseSnowballs();
         GatherInterrupt();
         
+    }
+
+    private void Update()
+    {
+        if (_cooldown > 0)
+        {
+            _cooldown = Mathf.Clamp(_cooldown - Time.deltaTime, 0, CooldownTime);
+        }
     }
 
     public int NumSnowballs()

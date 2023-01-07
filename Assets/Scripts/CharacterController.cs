@@ -124,6 +124,14 @@ public class CharacterController : MonoBehaviour
             }
         }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (_gatherer && _gatherer.CanThrow())
+            {
+                _gatherer.Throw();
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (_attacker)
