@@ -14,6 +14,14 @@ public class CharacterController : MonoBehaviour
     }
     
     private enum Directions{Up, Down, Left, Right}
+
+    private enum CharacterState
+    {
+        Normal,
+        Dashing,
+        Gathering, 
+        Attacking
+    }
     
     
 
@@ -23,7 +31,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float DashDuration = 1f;
     [SerializeField] private float DashMagnitude = 15f;
     [SerializeField] private float DashCooldown = 3f;
-    [Header("Orientation")]
+    [Header("HUD")] [SerializeField] private PlayerHUD PlayerHUD;
     
 
     protected float _currentMoveSpeed;
@@ -36,6 +44,7 @@ public class CharacterController : MonoBehaviour
     protected Vector2 _lastInputVector;
     protected bool _canChangeVelocity = true;
     
+    
     protected bool _isFacingRight;
     protected bool _isFacingLeft;
     protected bool _isFacingUp;
@@ -46,6 +55,9 @@ public class CharacterController : MonoBehaviour
     protected Transform _meleeHitBoxLoc;
 
     protected MeleeAttacker _attacker;
+    private CharacterState _characterState;
+    protected SnowGatherer _gatherer;
+    
 
     private void Awake()
     {
@@ -55,10 +67,12 @@ public class CharacterController : MonoBehaviour
         _currentMoveSpeed = 0;
         _dashCooldown = 0;
         _attacker = gameObject.GetComponent<MeleeAttacker>();
+        _gatherer = gameObject.GetComponent<SnowGatherer>();
         _isFacingRight = true;
         _isFacingLeft = _isFacingDown = _isFacingUp = false;
         _animator = gameObject.GetComponent<Animator>();
         _meleeHitBoxLoc = gameObject.transform.Find("WeaponHitBox");
+        _characterState = CharacterState.Normal;
     }
 
     // Update is called once per frame
@@ -78,7 +92,7 @@ public class CharacterController : MonoBehaviour
             _meleeHitBoxLoc.localPosition = _lastInputVector * 0.75f;
         }
 
-        if (_animator && !(_dashCooldown > 0))
+        if (_animator && _canChangeVelocity)
         {
             _animator.SetFloat("LastHorizontal", _lastInputVector.x);
             _animator.SetFloat("LastVertical", _lastInputVector.y);
@@ -90,9 +104,18 @@ public class CharacterController : MonoBehaviour
                 _animator.SetTrigger("Idle");
             }
         }
-        _lastMovementVector = _movementVector;  
-        _animator.SetFloat("MovementMagnitude", _movementVector.magnitude);
+        _lastMovementVector = _movementVector;
+        if (_characterState == CharacterState.Normal)
+        {
+            _animator.SetFloat("MovementMagnitude", _movementVector.magnitude);
+        }
         
+        if (_dashCooldown > 0)
+        {
+            _dashCooldown -= Time.deltaTime;
+        }
+
+        if (_characterState != CharacterState.Normal) return;
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (_dashCooldown <= 0)
@@ -111,17 +134,36 @@ public class CharacterController : MonoBehaviour
                 }
             }
         }
-        
-        HandleFacingDirection();
-        if (_dashCooldown > 0)
+
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            _dashCooldown -= Time.deltaTime;
+            if (_gatherer && _gatherer.CanGather())
+            {
+                _animator.SetFloat("MovementMagnitude", 0f);
+                _movementVector = new Vector2(0,0);
+                _gatherer.GatherSnow();
+                
+            }
         }
-        
+    }
+
+    public void SetGatheringSnow(bool isGathering)
+    {
+        _characterState = isGathering ? CharacterState.Gathering : CharacterState.Normal;
+    }
+
+    public void SetAttacking(bool isAttacking)
+    {
+        _characterState = isAttacking ? CharacterState.Attacking : CharacterState.Normal;
     }
 
     private void HandleDiagonalDirection()
     {
+        if (_characterState != CharacterState.Normal)
+        {
+            return;
+            
+        }
         if (Input.GetKeyDown(KeyCode.A))
         {
             _mostRecentlyPressed = KeyCode.A;
@@ -147,23 +189,10 @@ public class CharacterController : MonoBehaviour
         if (Input.GetKeyUp(_mostRecentlyPressed))
         {
             _movementVector.x = _movementVector.y = 0;
-            SetAnimatorParams();
+           
         }
         
         
-    }
-
-    private void SetAnimatorParams()
-    {
-        
-        if (_animator != null)
-        {
-            _animator.SetBool("IsFacingUp", _isFacingUp);
-            _animator.SetBool("IsFacingDown", _isFacingDown);
-            _animator.SetBool("IsFacingLeft", _isFacingLeft);
-            _animator.SetBool("IsFacingRight", _isFacingRight);
-            
-        }
     }
 
     private void FixedUpdate()
@@ -182,73 +211,20 @@ public class CharacterController : MonoBehaviour
     {
         
         
-        if (_canChangeVelocity)
-        {
-            _rigidbody2D.velocity = _movementVector * _currentMoveSpeed;
-        }
 
         if (_movementVector != new Vector2(0, 0))
         {
             _lastInputVector = _movementVector;
         }
+
         
-
-    }
-
-    private void HandleFacingDirection()
-    {
-        //Handles which way the character is facing, will only change if magnitude of movement vector is > 0;
         if (_canChangeVelocity)
         {
-            
-            if (_movementVector.x == 1 && _movementVector.y == -1)
-            {
-                
-                _isFacingRight = true;
-                
-                _isFacingDown = _isFacingUp = _isFacingLeft = false;
-                if (_curDirection != Directions.Right)
-                {
-                    _curDirection = Directions.Right;
-                    SetAnimatorParams();
-                }
-            }
-            if (_movementVector.x == -1 && _movementVector.y != 1)
-            {
-                _isFacingLeft = true;
-                
-                _isFacingDown = _isFacingUp = _isFacingRight = false;
-                if (_curDirection != Directions.Left)
-                {
-                    SetAnimatorParams();
-                    _curDirection = Directions.Left;
-                }
-            }
-
-            if (_movementVector.y == 1 && _movementVector.x != 1)
-            {
-                _isFacingUp = true;
-                
-                _isFacingDown = _isFacingRight = _isFacingLeft = false;
-                if (_curDirection != Directions.Up)
-                {
-                    SetAnimatorParams();
-                    _curDirection = Directions.Up;
-                }
-            }
-            if (_movementVector.y == -1 && _movementVector.x != -1)
-            {
-                _isFacingDown = true;
-                
-                _isFacingRight = _isFacingUp = _isFacingLeft = false;
-                if (_curDirection != Directions.Down)
-                {
-                    _curDirection = Directions.Down;
-                    SetAnimatorParams();
-                }
-            }
+            _rigidbody2D.velocity = _movementVector * _currentMoveSpeed;
         }
     }
+
+    
 
     private IEnumerator Dash()
     {
@@ -257,12 +233,17 @@ public class CharacterController : MonoBehaviour
         {
             _animator.SetBool("Sliding", true);
         }
+
+        _characterState = CharacterState.Dashing;
         _canChangeVelocity = false;
         _rigidbody2D.velocity = _lastInputVector * DashMagnitude;
         yield return new WaitForSeconds(DashDuration);
+        _characterState = CharacterState.Normal;
+        _movementVector = _lastInputVector;
         if (_animator)
         {
             _animator.SetBool("Sliding", false);
+            _animator.SetTrigger("Idle");
         }
         _canChangeVelocity = true;
         _dashCooldown = DashCooldown;
@@ -292,5 +273,13 @@ public class CharacterController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         
+    }
+
+    public void UpdateHUDSnowballs()
+    {
+        if (PlayerHUD)
+        {
+            PlayerHUD.SnowballText.text = _gatherer.NumSnowballs().ToString();
+        }
     }
 }

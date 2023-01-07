@@ -22,6 +22,7 @@ public class MeleeAttacker : MonoBehaviour
 
 
     protected Animator _animator;
+    protected CharacterController _character;
     protected float _attackCooldown;
     void Start()
     {
@@ -31,6 +32,7 @@ public class MeleeAttacker : MonoBehaviour
     private void Awake()
     {
         _animator = gameObject.GetComponent<Animator>();
+        _character = gameObject.GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -62,7 +64,8 @@ public class MeleeAttacker : MonoBehaviour
         {
             CreateDamageBox();
         }
-        
+
+       
         _attackCooldown = AttackCooldown;
     }
 
