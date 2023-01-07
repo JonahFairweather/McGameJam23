@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float InitialHealth = 100;
 
     [Header("Death")] [SerializeField] private bool DestroyOnDeath = true;
+    [SerializeField] private float DestructionDelaay = 2f;
 
 
     protected KnockbackTaker _knockback;
@@ -45,7 +46,8 @@ public class Health : MonoBehaviour
     {
         if (DestroyOnDeath)
         {
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, DestructionDelaay);
+            // If this is the player, we can show the loss screen
         }
     }
 

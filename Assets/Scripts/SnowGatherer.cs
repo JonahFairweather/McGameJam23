@@ -17,6 +17,7 @@ public class SnowGatherer : MonoBehaviour
     [Header("ThrowingStuffs")] [SerializeField]
     private float CooldownTime;
 
+    [SerializeField] private float TimeBeforeThrow = 0.5f;
     [SerializeField] private float MaxAngle = 45f;
     [SerializeField] private Transform SpawnLocation;
     [SerializeField] private Snowball SnowballToSpawn;
@@ -25,6 +26,7 @@ public class SnowGatherer : MonoBehaviour
     protected CharacterController _character;
     protected float _cooldown;
     protected Animator _animator;
+    protected Vector3 ThrowDir;
     private void Awake()
     {
         _character = gameObject.GetComponent<CharacterController>();
@@ -32,12 +34,24 @@ public class SnowGatherer : MonoBehaviour
         _animator = gameObject.GetComponent<Animator>();
     }
 
-    public bool CanThrow()
+    public bool CanThrow(Vector3 MouseWorldPos)
     {
+        Vector3 dir = MouseWorldPos - SpawnLocation.position;
+        dir.z = 0;
+        float angle = Vector3.Angle(dir.normalized, SpawnLocation.localPosition);
+        if (angle > MaxAngle) return false;
         return CurrentSnowballs > 0 && _cooldown <= 0;
     }
 
-    public void Throw()
+    public IEnumerator StartThrow(Vector3 MouseWorldPos)
+    {
+        _animator?.SetTrigger("ThrowSnowball");
+        _character.SetAttacking(true);
+        ThrowDir = MouseWorldPos - SpawnLocation.position;
+        yield return new WaitForSeconds(TimeBeforeThrow);
+        Throw(MouseWorldPos);
+    }
+    public void Throw(Vector3 MouseWorldPos)
     {
         if(CurrentSnowballs <=0) return;
         if (SnowballToSpawn != null)
@@ -47,26 +61,15 @@ public class SnowGatherer : MonoBehaviour
             s.AddObjectToIgnore(this.gameObject);
             if (s != null)
             {
-                Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - SpawnLocation.position;
-                dir.z = 0;
-                float angle = Vector3.Angle(dir.normalized, SpawnLocation.localPosition);
-                if (angle > MaxAngle)
-                {
-                    Destroy(s.gameObject);
-                    Debug.Log("Angle too large: " + angle);
-                    Debug.Log(dir.normalized.ToString() + " " + SpawnLocation.localPosition.normalized.ToString());
-                    return;
-                }
-                if (dir.magnitude > 1)
-                {
-                    s.SetVelocity(dir);
-                    _cooldown = CooldownTime;
-                    CurrentSnowballs -= 1;
-                }
-                else
-                {
-                    Destroy(s.gameObject);
-                }
+                
+                s.SetVelocity(ThrowDir);
+                s.Owner = this.gameObject;
+                _cooldown = CooldownTime;
+                CurrentSnowballs -= 1;
+                _character?.UpdateHUDSnowballs();
+                
+                StartCoroutine(_character.AttackFinished(0.16f));
+
             }
         }
     }
@@ -93,6 +96,7 @@ public class SnowGatherer : MonoBehaviour
         GatherInterrupt();
         
     }
+    
 
     private void Update()
     {

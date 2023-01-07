@@ -10,9 +10,10 @@ public class Snowball : MonoBehaviour {
     [SerializeField] private float Velocity = 10f;
     private List<GameObject> _objectsToIgnore;
     [SerializeField] private LayerMask LayersToIgnore;
+    [SerializeField] private float DamageAmount = 5f;
 
     private CircleCollider2D _collider;
-    
+    public GameObject Owner; 
 
     // Start is called before the first frame update
     void Start() {
@@ -65,7 +66,12 @@ public class Snowball : MonoBehaviour {
         {
             return;
         }
-        
+
+        Health h = other.gameObject.GetComponent<Health>();
+        if (h != null)
+        {
+            h.TakeDamage(DamageAmount, Owner);
+        }
         GameObject.Destroy(this.gameObject);
     }
 }

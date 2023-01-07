@@ -97,7 +97,7 @@ public class CharacterController : MonoBehaviour
             _animator.SetFloat("LastHorizontal", _lastInputVector.x);
             _animator.SetFloat("LastVertical", _lastInputVector.y);
         }
-        if (_movementVector.magnitude == 0 && _lastMovementVector.magnitude != 0)
+        if (_movementVector.magnitude == 0 && _lastMovementVector.magnitude != 0 && _characterState != CharacterState.Gathering)
         {
             if (_animator)
             {
@@ -126,9 +126,10 @@ public class CharacterController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (_gatherer && _gatherer.CanThrow())
+            Vector3 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (_gatherer && _gatherer.CanThrow(MousePos))
             {
-                _gatherer.Throw();
+                StartCoroutine(_gatherer.StartThrow(MousePos));
             }
         }
 
@@ -159,6 +160,16 @@ public class CharacterController : MonoBehaviour
     {
         _characterState = isGathering ? CharacterState.Gathering : CharacterState.Normal;
     }
+
+    public IEnumerator AttackFinished(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (_characterState == CharacterState.Attacking)
+        {
+            _characterState = CharacterState.Normal;
+        }
+    }
+    
 
     public void SetAttacking(bool isAttacking)
     {
@@ -248,7 +259,7 @@ public class CharacterController : MonoBehaviour
         _rigidbody2D.velocity = _lastInputVector * DashMagnitude;
         yield return new WaitForSeconds(DashDuration);
         _characterState = CharacterState.Normal;
-        _movementVector = _lastInputVector;
+       
         if (_animator)
         {
             _animator.SetBool("Sliding", false);

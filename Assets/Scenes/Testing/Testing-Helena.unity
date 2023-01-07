@@ -335,6 +335,10 @@ MonoBehaviour:
   CurrentSnowballs: 0
   MaxSwowballs: 5
   CooldownTime: 1.5
+  TimeBeforeThrow: 0.5
+  MaxAngle: 45
+  SpawnLocation: {fileID: 1878522083}
+  SnowballToSpawn: {fileID: 2384172929500873947, guid: 0e402ce4f12a345d6b4afe8c09c4a92d, type: 3}
 --- !u!1 &411004915
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +394,7 @@ MonoBehaviour:
   - {fileID: 6463675485660491160, guid: d3627090a531ff245af6d3d6da57c0d3, type: 3}
   - {fileID: 1173330107987278653, guid: c9c64e90f57e0a4499c3e315bdc46aab, type: 3}
   - {fileID: 5723747334007386974, guid: b69d656835ae5f34cbee19a2c11513f2, type: 3}
-  GenerateForestProc: 0
+  GenerateForestProc: 1
   NumCastsToMake: 100
   XBounds: {x: -30, y: 30}
   YBounds: {x: -50, y: 50}
@@ -584,6 +588,7 @@ MonoBehaviour:
   MaxHealth: 100
   InitialHealth: 100
   DestroyOnDeath: 1
+  DestructionDelaay: 2
 --- !u!1 &929358920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,6 +1020,11 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!4 &1878522083 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5226791407786291247, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
+  m_PrefabInstance: {fileID: 1915762186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1915762186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1183,3 +1193,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &982504254310641206
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 982504253356788340, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_Name
+      value: Fox
+      objectReference: {fileID: 0}
+    - target: {fileID: 982504253356788351, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 982504253356788351, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.277633
+      objectReference: {fileID: 0}
+    - target: {fileID: 982504253356788351, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.2523828
+      objectReference: {fileID: 0}
+    - target: {fileID: 982504253356788351, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.012225845
+      objectReference: {fileID: 0}
+    - target: {fileID: 982504253356788351, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 982504253356788351, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 982504253356788351, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 982504253356788351, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 982504253356788351, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 982504253356788351, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 982504253356788351, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e8c9b53d534e3e42967a5360d1eb130, type: 3}
