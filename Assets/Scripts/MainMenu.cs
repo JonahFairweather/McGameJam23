@@ -51,4 +51,14 @@ public class MainMenu : MonoBehaviour {
     public void CloseHowTo() {
         this.howToPlayScreen.SetActive(false);
     }
+
+    public void VolumeUp()
+    {
+        //INCREASE VOLUME
+    }
+
+    public void VolumeDown()
+    {
+        //DECREASE VOLUME
+    }
 }
