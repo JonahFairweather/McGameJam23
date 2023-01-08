@@ -501,4 +501,9 @@ public class CharacterController : MonoBehaviour
     //        AudioManager.Instance.PlayRandomMusic(backgroundAudios);
     //    }
     //}
+
+    public void StopMusic()
+    {
+        backgroundAudios.Stop();
+    }
 }
