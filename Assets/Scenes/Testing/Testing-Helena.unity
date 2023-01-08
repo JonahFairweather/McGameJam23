@@ -366,14 +366,14 @@ MonoBehaviour:
   VictoryTile: {fileID: 9187791127920052317, guid: 18f7be1db660ebb4fa7a6e181619842e, type: 3}
   GeneratePathAtAll: 0
   ForestFolliage:
-  - {fileID: 3526008488803502354, guid: fa3614f5238d21142ab9b781e836af62, type: 3}
-  - {fileID: 7776645969615337434, guid: 947e1e2e79d922147b1073d86cc727ba, type: 3}
-  - {fileID: 2660028941613370450, guid: aa33f58f3485b3549b467330842cca8b, type: 3}
-  - {fileID: 5054418558555352844, guid: 931e7b37e3a861d479a5653825d3d4df, type: 3}
-  - {fileID: 189148598638772986, guid: 51675b20d9fa3664da682e20cd1bc3d8, type: 3}
-  - {fileID: 8088856010364704519, guid: 7d2d3e573ef58294bad068c7f20f1fc3, type: 3}
-  - {fileID: 225705062410555574, guid: 61b5eb4fe73a6a840b1652b40bc8274b, type: 3}
-  - {fileID: 4461255672689149483, guid: fb5a5ac3af49b494d815e5ac6cf44460, type: 3}
+  - {fileID: 918782543948459056, guid: 325953b46ccd6a6438499080bcd41075, type: 3}
+  - {fileID: 8948583691176655436, guid: b3c34624f307e6943b853b225ffd2cc5, type: 3}
+  - {fileID: 8617645114024969358, guid: c235abbf149ce27479d96f4549d7c50b, type: 3}
+  - {fileID: 5405751654016755110, guid: da2a80f43bf261444bc171bab10e593c, type: 3}
+  - {fileID: 3895282807792860989, guid: 18ed9bd325e7f5b4eadbcb7ad453e04a, type: 3}
+  - {fileID: 3991405492148858026, guid: 9feb856ed35b4e842a00a7aa55e12c42, type: 3}
+  - {fileID: 5220230057059217908, guid: 9aa49536196328d4abd192f8dd9623d1, type: 3}
+  - {fileID: 8185307556180432956, guid: ed5116ac91a8f5b448c05f2d36844a2d, type: 3}
   GenerateForestProc: 1
   NumCastsToMake: 100
   XBounds: {x: -30, y: 30}
@@ -1066,6 +1066,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2021366378 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 750810815498401333, guid: fc25733fb6af93949b39ef29603eb161, type: 3}
+  m_PrefabInstance: {fileID: 4812574561545970058}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2021366388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021366378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0ea29d5f15ec5945889ce5a77bcede4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KnockbackMultiplier: 0.1
+  VelocityPauseTime: 0.5
 --- !u!1001 &982504254310641206
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1138,6 +1157,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sassy
       objectReference: {fileID: 0}
+    - target: {fileID: 5863653292072751581, guid: fc25733fb6af93949b39ef29603eb161, type: 3}
+      propertyPath: InstantiateOnDeath
+      value: 
+      objectReference: {fileID: 3452222120008718665, guid: 889e80120bcba784980e43c471841eb7, type: 3}
     - target: {fileID: 5878498921634433739, guid: fc25733fb6af93949b39ef29603eb161, type: 3}
       propertyPath: m_RootOrder
       value: 7
