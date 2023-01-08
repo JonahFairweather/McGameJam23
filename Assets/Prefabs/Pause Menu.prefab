@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6518622732520715526}
   - component: {fileID: 6518622732520715527}
   - component: {fileID: 6518622732520715528}
-  - component: {fileID: 6518622732520715529}
+  - component: {fileID: 6785770382600538556}
   m_Layer: 5
   m_Name: Pause Menu
   m_TagString: Untagged
@@ -60,7 +60,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &6518622732520715527
 MonoBehaviour:
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6518622732520715529
+--- !u!114 &6785770382600538556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,8 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d789afe0fa84601a9598186646c09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: Main Menu
-  pauseScreen: {fileID: 6518622733487433759}
+  mainMenu: 
+  pauseScreen: {fileID: 0}
+  sceneTransition: {fileID: 0}
 --- !u!1 &6518622733451231329
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +438,7 @@ PrefabInstance:
     - target: {fileID: 7392011973688117120, guid: 5fa4ea2c9ffa14715ac825cd1f18df1b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6518622732520715529}
+      objectReference: {fileID: 6785770382600538556}
     - target: {fileID: 7392011973688117120, guid: 5fa4ea2c9ffa14715ac825cd1f18df1b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Home
@@ -567,7 +568,7 @@ PrefabInstance:
     - target: {fileID: 7392011973688117120, guid: 5fa4ea2c9ffa14715ac825cd1f18df1b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6518622732520715529}
+      objectReference: {fileID: 6785770382600538556}
     - target: {fileID: 7392011973688117120, guid: 5fa4ea2c9ffa14715ac825cd1f18df1b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Restart
@@ -697,7 +698,7 @@ PrefabInstance:
     - target: {fileID: 7392011973688117120, guid: 5fa4ea2c9ffa14715ac825cd1f18df1b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6518622732520715529}
+      objectReference: {fileID: 6785770382600538556}
     - target: {fileID: 7392011973688117120, guid: 5fa4ea2c9ffa14715ac825cd1f18df1b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Resume

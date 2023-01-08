@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour {
 
     [SerializeField] public AudioClip backgroundAudio;
 
+    [SerializeField] public SceneTransition sceneTransition;
+
     // Start is called before the first frame update
     void Start() {
         this.howToPlayScreen.SetActive(false);
@@ -22,7 +24,8 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void StartGame() {
-        SceneManager.LoadScene(gameScene);
+        // SceneManager.LoadScene(gameScene);
+        this.sceneTransition.LoadNewScene(this.gameScene);
     }
 
     public void QuitGame() {
