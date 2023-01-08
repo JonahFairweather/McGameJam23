@@ -965,7 +965,6 @@ PrefabInstance:
       propertyPath: PlayerHUD
       value: 
       objectReference: {fileID: 103622009}
-<<<<<<< HEAD
     - target: {fileID: 6533574284968119279, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
       propertyPath: backgroundAudio
       value: 
@@ -978,8 +977,6 @@ PrefabInstance:
       propertyPath: backgroundAudios.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: d3e482d0457fb4923b66faeafc80cc09, type: 3}
-=======
->>>>>>> 701fadd04a962639718137d46956c19702521490
     - target: {fileID: 6533574284968119283, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
       propertyPath: m_Name
       value: JimboThePenguin
