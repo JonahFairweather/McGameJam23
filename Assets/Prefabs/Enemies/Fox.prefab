@@ -154,12 +154,8 @@ MonoBehaviour:
   InitialHealth: 100
   DestroyOnDeath: 1
   DestructionDelaay: 2
-<<<<<<< HEAD
   deathAudio: {fileID: 8300000, guid: fb9e8e1985a3e4fc0854f62b1e9dd736, type: 3}
   damageAudio: {fileID: 8300000, guid: 8f30cdc30edcd422abc5336f8f2c70ed, type: 3}
-=======
-  InstantiateOnDeath: {fileID: 0}
->>>>>>> 701fadd04a962639718137d46956c19702521490
 --- !u!58 &982504253356788338
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -213,11 +209,8 @@ MonoBehaviour:
   DamageLocation: {fileID: 4161352971321156007}
   CircleRadius: 0.75
   AttackCooldown: 2
-<<<<<<< HEAD
-  TimeBeforeEnableDamage: 0.2
   penguinPeckingAudio: {fileID: 8300000, guid: 1459d3c8677104aa7a9fb4715b8040cf, type: 3}
   enemyPeckingAudio: {fileID: 8300000, guid: 9776857ec30844034baf0fc79d8c533d, type: 3}
-=======
   TimeBeforeEnableDamage: 0.3
 --- !u!114 &798455459604113342
 MonoBehaviour:
@@ -245,7 +238,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KnockbackMultiplier: 0.01
   VelocityPauseTime: 0.5
->>>>>>> 701fadd04a962639718137d46956c19702521490
 --- !u!1 &2122803951727730800
 GameObject:
   m_ObjectHideFlags: 0

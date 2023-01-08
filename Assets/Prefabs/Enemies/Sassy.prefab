@@ -135,6 +135,7 @@ MonoBehaviour:
   DetectionRadius: 5
   HasStandingAnim: 0
   RunsFromPlayer: 0
+  alertAudio: {fileID: 8300000, guid: 7a085ec41f3b642229953fdefdb3940d, type: 3}
 --- !u!114 &75732397304762235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +153,11 @@ MonoBehaviour:
   CircleRadius: 1.5
   AttackCooldown: 2
   TimeBeforeEnableDamage: 0.3
+  AppliesKnockback: 1
+  KnockbackMultiplier: 2
+  KnockbackDuration: 1
+  penguinPeckingAudio: {fileID: 8300000, guid: 1459d3c8677104aa7a9fb4715b8040cf, type: 3}
+  enemyPeckingAudio: {fileID: 8300000, guid: 9776857ec30844034baf0fc79d8c533d, type: 3}
 --- !u!114 &8751036840532386843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +188,8 @@ MonoBehaviour:
   DestroyOnDeath: 1
   DestructionDelaay: 2
   InstantiateOnDeath: {fileID: 0}
+  deathAudio: {fileID: 8300000, guid: fb9e8e1985a3e4fc0854f62b1e9dd736, type: 3}
+  damageAudio: {fileID: 8300000, guid: 8f30cdc30edcd422abc5336f8f2c70ed, type: 3}
 --- !u!50 &4371497848600167362
 Rigidbody2D:
   serializedVersion: 4
