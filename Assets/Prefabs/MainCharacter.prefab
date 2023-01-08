@@ -316,7 +316,7 @@ MonoBehaviour:
   InitialHealth: 100
   DestroyOnDeath: 1
   DestructionDelaay: 2
-  InstantiateOnDeath: {fileID: 7636806522253380833, guid: dcc08773d57abdb48a13ab6f214c5002, type: 3}
+  InstantiateOnDeath: {fileID: 6143131009728310301, guid: 6fa190232e9954a409e424c4f4742b6f, type: 3}
   FlashOnDamage: 1
   DamageFlash:
     serializedVersion: 2

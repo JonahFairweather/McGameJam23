@@ -71,6 +71,7 @@ public class CharacterController : MonoBehaviour
     protected int _numBearKills;
     protected int _numFoxKills;
 
+    [SerializeField] private GameObject _winScreen;
     [SerializeField] public AudioClip[] backgroundAudios;
     [SerializeField] public AudioClip slidingAudio;
 
@@ -95,6 +96,7 @@ public class CharacterController : MonoBehaviour
         _dialogueMode = false;
         _renderer = gameObject.GetComponent<Renderer>();
         _numBearKills = _numFoxKills = 0;
+        _winScreen.SetActive(false);
         _myCollider = gameObject.GetComponent<CircleCollider2D>();
     }
 
@@ -270,6 +272,14 @@ public class CharacterController : MonoBehaviour
         if (PlayerHUD)
         {
             PlayerHUD.panel.SetActive(true);
+        }
+    }
+
+    public void Win()
+    {
+        if (_winScreen)
+        {
+            _winScreen.SetActive(true);
         }
     }
 

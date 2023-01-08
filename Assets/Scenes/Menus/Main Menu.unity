@@ -187,7 +187,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -402,6 +402,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneTransition
       objectReference: {fileID: 0}
+    - target: {fileID: 2123947499867180608, guid: 758ed4c7e38ba4d86bd5c9dc2080b701, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1149
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123947499867180608, guid: 758ed4c7e38ba4d86bd5c9dc2080b701, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1149
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123947499867180608, guid: 758ed4c7e38ba4d86bd5c9dc2080b701, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1149
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758ed4c7e38ba4d86bd5c9dc2080b701, type: 3}
 --- !u!1001 &8510507887861562731
@@ -497,7 +509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2091789545673672670, guid: f37cf3ecbfbd84e7c8e02f90ae78bade, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -445.01
+      value: -381.01004
       objectReference: {fileID: 0}
     - target: {fileID: 2770036732746310295, guid: f37cf3ecbfbd84e7c8e02f90ae78bade, type: 3}
       propertyPath: m_LocalScale.x
@@ -533,7 +545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4096266404011095571, guid: f37cf3ecbfbd84e7c8e02f90ae78bade, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -445
+      value: -381
       objectReference: {fileID: 0}
     - target: {fileID: 4331013467056187877, guid: f37cf3ecbfbd84e7c8e02f90ae78bade, type: 3}
       propertyPath: m_Colors.m_PressedColor.b
@@ -622,6 +634,18 @@ PrefabInstance:
     - target: {fileID: 8510507887039995595, guid: f37cf3ecbfbd84e7c8e02f90ae78bade, type: 3}
       propertyPath: m_PreserveAspect
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8510507887039995636, guid: f37cf3ecbfbd84e7c8e02f90ae78bade, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 8510507887039995636, guid: f37cf3ecbfbd84e7c8e02f90ae78bade, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8510507887039995636, guid: f37cf3ecbfbd84e7c8e02f90ae78bade, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9375
       objectReference: {fileID: 0}
     - target: {fileID: 8510507887710637881, guid: f37cf3ecbfbd84e7c8e02f90ae78bade, type: 3}
       propertyPath: gameScene

@@ -82,6 +82,22 @@ public class GeneratePath : MonoBehaviour
     private void SpawnPenguinFamily()
     {
         StartCoroutine(SpawnFamily());
+        BoxCollider2D victory = gameObject.AddComponent<BoxCollider2D>();
+        victory.isTrigger = true;
+        victory.offset = new Vector2(0, PositiveYMax+ 5);
+        victory.size = new Vector2(200, 10);
+
+
+
+
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.GetComponent<CharacterController>() != null)
+        {
+            other.GetComponent<CharacterController>().Win();
+        }
     }
 
     private IEnumerator SpawnFamily()

@@ -140,6 +140,11 @@ public class Health : MonoBehaviour
             Destroy(this.gameObject, DestructionDelaay);
             // If this is the player, we can show the loss screen
         }
+
+        if (InstantiateOnDeath)
+        {
+            StartCoroutine(SpawnDestroyObject());
+        }
         
         if (_characterMovementManager)
         {
@@ -157,21 +162,14 @@ public class Health : MonoBehaviour
         return CurrentHealth > 0;
     }
 
+    private IEnumerator SpawnDestroyObject()
+    {
+        yield return new WaitForSeconds(DestructionDelaay - 0.01f);
+        Instantiate(InstantiateOnDeath, transform.position, quaternion.identity);
+    }
     private void OnDestroy()
     {
-        if (InstantiateOnDeath)
-        {
-            GameObject obj = Instantiate(InstantiateOnDeath, transform.position, quaternion.identity);
-            if (obj != null)
-            {
-                Renderer[] r = obj.GetComponentsInChildren<Renderer>();
 
-                foreach (Renderer rend in r)
-                {
-                    rend.sortingOrder = (int)obj.transform.position.y * -1;
-                }
-            }
-        }
     }
     
     
