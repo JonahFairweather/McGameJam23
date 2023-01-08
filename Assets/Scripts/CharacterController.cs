@@ -71,7 +71,7 @@ public class CharacterController : MonoBehaviour
     protected int _numBearKills;
     protected int _numFoxKills;
 
-        [SerializeField] public AudioClip[] backgroundAudios;
+        [SerializeField] public AudioSource backgroundAudios;
     [SerializeField] public AudioClip slidingAudio;
 
     private void Awake()
@@ -96,6 +96,7 @@ public class CharacterController : MonoBehaviour
         _renderer = gameObject.GetComponent<Renderer>();
         _numBearKills = _numFoxKills = 0;
         _myCollider = gameObject.GetComponent<CircleCollider2D>();
+        backgroundAudios.Play();
     }
 
     public void DisableInput()
@@ -132,6 +133,7 @@ public class CharacterController : MonoBehaviour
             _polledAudioInstance = true;
         }
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -399,7 +401,6 @@ public class CharacterController : MonoBehaviour
         if (Input.GetKeyUp(_mostRecentlyPressed))
         {
             _movementVector.x = _movementVector.y = 0;
-           
         }
         
         
@@ -439,10 +440,6 @@ public class CharacterController : MonoBehaviour
             _rigidbody2D.velocity = _movementVector * _currentMoveSpeed;
         }
     }
-
-    
-
-    
 
     void HandleRotation()
     {

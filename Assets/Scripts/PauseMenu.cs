@@ -7,12 +7,14 @@ public class PauseMenu : MonoBehaviour {
     [SerializeField] public string mainMenu;
     [SerializeField] GameObject pauseScreen;
     private bool isPaused = false;
+    public CharacterController jimbo;
 
     [SerializeField] public SceneTransition sceneTransition;
 
     // Start is called before the first frame update
     void Start() {
         this.pauseScreen.SetActive(false);
+        jimbo = Object.FindObjectOfType<CharacterController>();
     }
 
     // Update is called once per frame
@@ -42,5 +44,6 @@ public class PauseMenu : MonoBehaviour {
         // SceneManager.LoadScene(this.mainMenu);
         Time.timeScale = 1f;
         this.sceneTransition.LoadNewScene(this.mainMenu);
+        jimbo.StopMusic();
     }
 }
