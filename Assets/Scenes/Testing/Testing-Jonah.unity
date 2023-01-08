@@ -251,10 +251,45 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 98f59f556c9887c408ac3fec8c91fe91, type: 3}
   - {fileID: 21300000, guid: d04207e97116205458f10fb69c603297, type: 3}
   - {fileID: 21300000, guid: 151b8e138ddf752468b49c9ce4365d45, type: 3}
+  Frame1:
+  - {fileID: 21300000, guid: a343c969726f4eb479c16253c3d96248, type: 3}
+  - {fileID: 21300000, guid: 280fd3c9d4cbba241bb487d6c152fe6a, type: 3}
+  - {fileID: 21300000, guid: dd2f69e4ecf73e440b8b4bac2dfaac4b, type: 3}
+  - {fileID: 21300000, guid: 1bc917ffecf1b8a42aaa3b7417b6ca64, type: 3}
+  Frame2:
+  - {fileID: 21300000, guid: 3b25f9fcf159ded4885ddf4c5274f466, type: 3}
+  - {fileID: 21300000, guid: 3c5fa181af5f9444a8aaf42ce1b5ebe4, type: 3}
+  - {fileID: 21300000, guid: 3625d656ac6d79f4f92bcb0dc28cb1d4, type: 3}
+  - {fileID: 21300000, guid: 525b7f571e6cb3d498ec54168007a3ae, type: 3}
+  - {fileID: 21300000, guid: ad001b8c7b5432242a678dfa36078c48, type: 3}
+  - {fileID: 21300000, guid: 99ac2d0bc6595314986ad8eb608c1d44, type: 3}
+  - {fileID: 21300000, guid: 5ef5d8dc35d9e7547bc5ddde0053c48e, type: 3}
+  Frame3:
+  - {fileID: 21300000, guid: c05b2b3b7cc2bb948a74fe79b2da1ad1, type: 3}
+  - {fileID: 21300000, guid: 2365efd4c387cf94b86fafe372cc7a7c, type: 3}
+  - {fileID: 21300000, guid: 855fbdea587c0f144ae40e36f7e24fa7, type: 3}
+  - {fileID: 21300000, guid: 9bf834d94605fb340acd4583c5b9623e, type: 3}
+  Frame4:
+  - {fileID: 21300000, guid: f4e71ac518ea1ee43b67d0e4e2126746, type: 3}
+  - {fileID: 21300000, guid: 02d3e0fb0c422324f8163dcd34e28852, type: 3}
+  - {fileID: 21300000, guid: 70a9e26280d48cb49b8d9ae16358a65b, type: 3}
+  - {fileID: 21300000, guid: 673bd02bd1d44a740a70b00d44113cec, type: 3}
+  Frame5:
+  - {fileID: 21300000, guid: 761d774ff5d08e846a39ed1e2253ae0f, type: 3}
+  - {fileID: 21300000, guid: d94aab478fbea83459f1e842f0a0d570, type: 3}
+  - {fileID: 21300000, guid: 02b7ec1afdb30e54984fa837868200b8, type: 3}
+  - {fileID: 21300000, guid: 2778273e7e56fb147ba72c3c841900df, type: 3}
+  - {fileID: 21300000, guid: f8acfdd4a4e38b7458b2fe4efabc7725, type: 3}
+  - {fileID: 21300000, guid: fc2e18fe01cb9604c8bf42edd1bc71a0, type: 3}
+  - {fileID: 21300000, guid: d0569b946443e62479183e6d5ba8940e, type: 3}
+  - {fileID: 21300000, guid: 98f59f556c9887c408ac3fec8c91fe91, type: 3}
+  - {fileID: 21300000, guid: d04207e97116205458f10fb69c603297, type: 3}
+  - {fileID: 21300000, guid: 151b8e138ddf752468b49c9ce4365d45, type: 3}
   TimeBetweenFrames: 0.1
   CinematicTheme: {fileID: 8300000, guid: dbc21cbc4f9c2ac4faeb68541a395c1c, type: 3}
   LoadOnceDone: Testing-Helena
   sceneTransition: {fileID: 1476805821}
+  skipKeycode: 32
 --- !u!212 &674714606
 SpriteRenderer:
   m_ObjectHideFlags: 0
