@@ -84,7 +84,10 @@ public class MeleeAttacker : MonoBehaviour
             if (c.gameObject != gameObject)
             {
                 Health h = c.gameObject.GetComponent<Health>();
-                h?.TakeDamage(DamageAmount, gameObject);
+                if (h != null)
+                {
+                    h.TakeDamage(DamageAmount, gameObject);
+                }
             }
         }
         

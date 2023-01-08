@@ -43,7 +43,7 @@ public class CharacterController : MonoBehaviour
     protected Vector2 _lastMovementVector;
     protected Vector2 _lastInputVector;
     protected bool _canChangeVelocity = true;
-    
+    protected bool _canMove;
     
     protected bool _isFacingRight;
     protected bool _isFacingLeft;
@@ -53,7 +53,7 @@ public class CharacterController : MonoBehaviour
     private KeyCode _mostRecentlyPressed;
     private Directions _curDirection;
     protected Transform _meleeHitBoxLoc;
-
+    protected Renderer _renderer;
     protected MeleeAttacker _attacker;
     private CharacterState _characterState;
     protected SnowGatherer _gatherer;
@@ -73,11 +73,18 @@ public class CharacterController : MonoBehaviour
         _animator = gameObject.GetComponent<Animator>();
         _meleeHitBoxLoc = gameObject.transform.Find("WeaponHitBox");
         _characterState = CharacterState.Normal;
+        _canMove = true;
+        _renderer = gameObject.GetComponent<Renderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (_renderer)
+        {
+            _renderer.sortingOrder = (int)transform.position.y;
+        }
         
         HandleDiagonalDirection();
         if (_animator && _canChangeVelocity)
@@ -156,6 +163,11 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    public void StopMovement()
+    {
+        _canMove = false;
+    }
+    
     public void SetGatheringSnow(bool isGathering)
     {
         _characterState = isGathering ? CharacterState.Gathering : CharacterState.Normal;
@@ -228,8 +240,11 @@ public class CharacterController : MonoBehaviour
 
     void Move()
     {
-        
-        
+
+        if (!_canMove)
+        {
+            return;
+        }
 
         if (_movementVector != new Vector2(0, 0))
         {
