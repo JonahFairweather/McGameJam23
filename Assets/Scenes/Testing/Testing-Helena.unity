@@ -1776,6 +1776,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6518622733487433758, guid: 23a0197f995b24fad8d3eb4cd8aa1cfe, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6785770382600538556, guid: 23a0197f995b24fad8d3eb4cd8aa1cfe, type: 3}
       propertyPath: mainMenu
       value: Main Menu
@@ -1925,6 +1929,11 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!4 &697006527 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3862833806887341243, guid: 3419fef0e6f8c48779ba2a4f910c7642, type: 3}
+  m_PrefabInstance: {fileID: 1714531874}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &731549975 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9050274359794340479, guid: 59f23ea6479ad4bc684d235c740328dd, type: 3}
@@ -1936,11 +1945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf737d486964d4789b3d24f6ab95c57a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &697006527 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3862833806887341243, guid: 3419fef0e6f8c48779ba2a4f910c7642, type: 3}
-  m_PrefabInstance: {fileID: 1714531874}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &767250039
 GameObject:
   m_ObjectHideFlags: 0
