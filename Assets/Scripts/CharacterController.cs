@@ -71,7 +71,7 @@ public class CharacterController : MonoBehaviour
     protected int _numBearKills;
     protected int _numFoxKills;
 
-        [SerializeField] public AudioClip[] backgroundAudios;
+        [SerializeField] public AudioSource backgroundAudios;
     [SerializeField] public AudioClip slidingAudio;
 
     private void Awake()
@@ -96,6 +96,7 @@ public class CharacterController : MonoBehaviour
         _renderer = gameObject.GetComponent<Renderer>();
         _numBearKills = _numFoxKills = 0;
         _myCollider = gameObject.GetComponent<CircleCollider2D>();
+        backgroundAudios.Play();
     }
 
     public void DisableInput()
@@ -124,26 +125,26 @@ public class CharacterController : MonoBehaviour
     }
 
 
-    void PollAudioInstance()
-    {
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlayRandomMusic(this.backgroundAudios);
-            _polledAudioInstance = true;
-        }
-    }
+    //void PollAudioInstance()
+    //{
+    //    if (AudioManager.Instance != null)
+    //    {
+    //        AudioManager.Instance.PlayRandomMusic(this.backgroundAudios);
+    //        _polledAudioInstance = true;
+    //    }
+    //}
     // Update is called once per frame
     void Update()
     {
-        if (!_polledAudioInstance)
-        {
-            PollAudioInstance();
-        }
+        //if (!_polledAudioInstance)
+        //{
+        //    PollAudioInstance();
+        //}
 
-        if (AudioManager.Instance != null)
-        {
-            HandleBackgroundMusic();
-        }
+        //if (AudioManager.Instance != null)
+        //{
+        //    HandleBackgroundMusic();
+        //}
         
 
         if(!_disabled) HandleDiagonalDirection();
@@ -495,9 +496,9 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    private void HandleBackgroundMusic() {
-        if(!AudioManager.Instance.IsPlayingMusic()) {
-            AudioManager.Instance.PlayRandomMusic(backgroundAudios);
-        }
-    }
+    //private void HandleBackgroundMusic() {
+    //    if(!AudioManager.Instance.IsPlayingMusic()) {
+    //        AudioManager.Instance.PlayRandomMusic(backgroundAudios);
+    //    }
+    //}
 }
