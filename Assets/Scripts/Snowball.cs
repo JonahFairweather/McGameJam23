@@ -11,8 +11,10 @@ public class Snowball : MonoBehaviour {
     private List<GameObject> _objectsToIgnore;
     [SerializeField] private LayerMask LayersToIgnore;
     [SerializeField] private float DamageAmount = 5f;
+    [SerializeField] private float MaximumLifetime = 5f;
 
     private CircleCollider2D _collider;
+    protected float _lifeTimeElapsed;
     public GameObject Owner; 
 
     // Start is called before the first frame update
@@ -55,7 +57,14 @@ public class Snowball : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        
+        if (_lifeTimeElapsed < MaximumLifetime)
+        {
+            _lifeTimeElapsed += Time.deltaTime;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 

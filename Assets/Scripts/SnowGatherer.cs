@@ -65,6 +65,7 @@ public class SnowGatherer : MonoBehaviour
             {
                 
                 s.SetVelocity(ThrowDir);
+                s.transform.Rotate(ThrowDir);
                 s.Owner = this.gameObject;
                 _cooldown = CooldownTime;
                 CurrentSnowballs -= 1;
@@ -89,7 +90,11 @@ public class SnowGatherer : MonoBehaviour
             _character.SetGatheringSnow(true);
         }
 
-        AudioManager.Instance.PlayEffect(gatherSnowAudio);
+        if (gatherSnowAudio)
+        {
+            AudioManager.Instance.PlayEffect(gatherSnowAudio);
+        }
+        
         StartCoroutine(SetCanInterrupt(0.66f));
     }
 

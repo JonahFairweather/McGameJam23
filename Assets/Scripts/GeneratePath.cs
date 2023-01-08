@@ -69,10 +69,10 @@ public class GeneratePath : MonoBehaviour
 
     private void SetLayerBasedOnYValue(GameObject obj)
     {
-        Renderer r = obj.GetComponent<Renderer>();
-        if (r != null)
+        Renderer[] r = obj.GetComponentsInChildren<Renderer>();
+        foreach (Renderer rend in r)
         {
-            r.sortingOrder = (int) r.transform.position.y * -1;
+            rend.sortingOrder = (int)obj.transform.position.y * -1;
         }
     }
 

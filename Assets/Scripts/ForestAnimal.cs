@@ -89,6 +89,7 @@ public class ForestAnimal : MonoBehaviour
         if (!_canMove)
         {
             //Cannot attack either
+            
             return;
         }
 
@@ -143,7 +144,7 @@ public class ForestAnimal : MonoBehaviour
             _rigidbody2D.velocity = new Vector2(0, 0);
             return;
         }
-        if (_rigidbody2D != null && dir.magnitude > AttackDistance)
+        if (_rigidbody2D != null && dir.magnitude > AttackDistance/2f)
         {
             if (LockToFourAxis)
             {
@@ -194,13 +195,22 @@ public class ForestAnimal : MonoBehaviour
     {
         _animator.SetTrigger("Stand");
         yield return new WaitForSeconds(1f);
-        isSitting = false;
-        _canMove = true;
+        
+        if (_target != null)
+        {
+            _canMove = true;
+            isSitting = false;
+        }
+        
     }
 
     private void Sit()
     {
         if (!_health.IsAlive()) return;
+        if (_rigidbody2D)
+        {
+            _rigidbody2D.velocity = new Vector2(0, 0);
+        }
         _canMove = false;
         isSitting = true;
         _animator.SetTrigger("Sit");
@@ -217,6 +227,7 @@ public class ForestAnimal : MonoBehaviour
         if (other.transform == _target)
         {
             _target = null;
+            Debug.Log("No more target!");
             Sit();
         }
 

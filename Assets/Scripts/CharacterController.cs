@@ -154,7 +154,7 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (_attacker)
             {
@@ -209,19 +209,19 @@ public class CharacterController : MonoBehaviour
             return;
             
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            _mostRecentlyPressed = KeyCode.Q;
+            _movementVector.x = -1;
+            _movementVector.y = 1;
+        }else if (Input.GetKeyDown(KeyCode.A))
         {
             _mostRecentlyPressed = KeyCode.A;
             _movementVector.x = -1;
-            _movementVector.y = 1;
-        }else if (Input.GetKeyDown(KeyCode.S))
-        {
-            _mostRecentlyPressed = KeyCode.S;
-            _movementVector.x = -1;
             _movementVector.y = -1;
-        }else if (Input.GetKeyDown(KeyCode.W))
+        }else if (Input.GetKeyDown(KeyCode.E))
         {
-            _mostRecentlyPressed = KeyCode.W;
+            _mostRecentlyPressed = KeyCode.E;
             _movementVector.x = 1;
             _movementVector.y = 1;
         }else if (Input.GetKeyDown(KeyCode.D))

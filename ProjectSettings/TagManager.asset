@@ -41,6 +41,9 @@ TagManager:
   - name: Snow
     uniqueID: 3495850561
     locked: 0
+  - name: Shadow
+    uniqueID: 930443683
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

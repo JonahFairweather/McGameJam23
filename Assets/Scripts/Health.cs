@@ -106,10 +106,11 @@ public class Health : MonoBehaviour
             GameObject obj = Instantiate(InstantiateOnDeath, transform.position, quaternion.identity);
             if (obj != null)
             {
-                Renderer r = obj.GetComponent<Renderer>();
-                if (r != null)
+                Renderer[] r = obj.GetComponentsInChildren<Renderer>();
+
+                foreach (Renderer rend in r)
                 {
-                    r.sortingOrder = (int) (obj.transform.position.y + 2) * -1;
+                    rend.sortingOrder = (int)obj.transform.position.y * -1;
                 }
             }
         }
