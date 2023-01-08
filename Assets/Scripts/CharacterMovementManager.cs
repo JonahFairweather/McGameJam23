@@ -48,5 +48,10 @@ public class CharacterMovementManager : MonoBehaviour
         {
             _forestAnimal.PauseMovement(true);
         }
+
+        if (_characterController)
+        {
+            _characterController.StopMovement();
+        }
     }
 }

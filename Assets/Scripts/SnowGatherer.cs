@@ -95,7 +95,7 @@ public class SnowGatherer : MonoBehaviour
             AudioManager.Instance.PlayEffect(gatherSnowAudio);
         }
         
-        StartCoroutine(SetCanInterrupt(0.66f));
+        StartCoroutine(SetCanInterrupt(0.33f));
     }
 
     private IEnumerator SetCanInterrupt(float time)

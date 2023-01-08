@@ -23,6 +23,7 @@ public class ForestAnimal : MonoBehaviour
     [SerializeField] private float DetectionRadius = 2f;
     [SerializeField] private bool HasStandingAnim;
     [SerializeField] private bool RunsFromPlayer;
+    [SerializeField] private Gradient StunGradient;
     
     
 
@@ -32,6 +33,7 @@ public class ForestAnimal : MonoBehaviour
     protected bool _canMove;
     protected Animator _animator;
     protected bool _disabled;
+    protected bool _unprotected;
     protected MeleeAttacker _attacker;
     protected SpriteRenderer _renderer;
     protected Rigidbody2D _rigidbody2D;
@@ -111,12 +113,37 @@ public class ForestAnimal : MonoBehaviour
             if (_attacker && _attacker.CanAttack())
             {
                 _attacker.Attack();
-                
             }
             
         }
         
         
+    }
+
+    public bool GetIsUnprotected()
+    {
+        return _unprotected;
+    }
+
+    public void StartUnprotectForDuration(float duration)
+    {
+        StartCoroutine(UnprotectForDuration(duration));
+    }
+
+    public IEnumerator UnprotectForDuration(float duration)
+    {
+        _unprotected = true;
+        float _durationElapsed = 0f;
+        while (_durationElapsed < duration)
+        {
+            _durationElapsed += Time.deltaTime;
+            _renderer.color = StunGradient.Evaluate(_durationElapsed / duration);
+            
+            yield return null;
+        }
+
+        _unprotected = false;
+
     }
 
     public void DisableAnimalBehavior()
@@ -142,6 +169,36 @@ public class ForestAnimal : MonoBehaviour
     {
         _canMove = true;
         _disabled = false;
+        Collider2D[] Colliders = Physics2D.OverlapCircleAll(transform.position, DetectionRadius);
+        foreach (Collider2D c in Colliders)
+        {
+            if (c.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Player found");
+                if (CanBeObstructed)
+                {
+                    Vector2 dir = c.transform.position - transform.position;
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position , c.transform.position - transform.position,
+                        DetectionRadius + 5f, ObstructionLayers
+                    );
+                    if (hit.transform != c.transform)
+                    {
+                        Debug.Log("Something in da wei");
+                    }
+                    else
+                    {
+                        Debug.Log("Target found");
+                        _target = c.transform;
+                    }
+                }
+                else
+                {
+                    Debug.Log("banana");
+                    _target = c.transform;
+                }
+            }
+        }
+        
     }
 
     public void PauseMovement(bool stopVelo)
@@ -157,7 +214,7 @@ public class ForestAnimal : MonoBehaviour
     public IEnumerator PauseMovementAndResume(float delay)
     {
         _canMove = false;
-        
+        _rigidbody2D.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(delay);
         _rigidbody2D.velocity = new Vector2(0, 0);
         _canMove = true;

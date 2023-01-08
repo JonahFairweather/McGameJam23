@@ -91,11 +91,13 @@ public class MeleeAttacker : MonoBehaviour
         } else {
             AudioManager.Instance.PlayEffect(this.enemyPeckingAudio);
         }
+
+        if (!GetComponent<Health>().IsAlive()) return;
         Collider2D[] overlapped = Physics2D.OverlapCircleAll(DamageLocation.position, CircleRadius);
         Debug.Log(overlapped.Length);
         foreach(Collider2D c in overlapped)
         {
-            if (c.gameObject != gameObject)
+            if (c.gameObject != gameObject && !CompareTag(c.gameObject.tag) && !c.isTrigger)
             {
                 Health h = c.gameObject.GetComponent<Health>();
                 if (h != null)

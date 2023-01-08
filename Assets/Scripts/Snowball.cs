@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class Snowball : MonoBehaviour {
     [SerializeField] private LayerMask LayersToIgnore;
     [SerializeField] private float DamageAmount = 5f;
     [SerializeField] private float MaximumLifetime = 5f;
+    [SerializeField] private bool Stuns = true;
+    [SerializeField] private float StunDuration = 1f;
 
     [SerializeField] public AudioClip snowballCollisionWithAnimal;
     [SerializeField] public AudioClip snowballCollisionWithObstacle;
@@ -84,7 +87,17 @@ public class Snowball : MonoBehaviour {
         if (h != null)
         {
             AudioManager.Instance.PlayEffect(this.snowballCollisionWithAnimal);
-            h.TakeDamage(DamageAmount, Owner);
+            h.TakeDamage(0, Owner);
+            ForestAnimal f = other.gameObject.GetComponent<ForestAnimal>();
+            if (f != null)
+            {
+                f.StartUnprotectForDuration(StunDuration);
+            }
+            CharacterMovementManager m = other.gameObject.GetComponent<CharacterMovementManager>();
+            if (m != null && Stuns)
+            {
+                m.PauseMovement(StunDuration);
+            }
         }
         GameObject.Destroy(this.gameObject);
     }

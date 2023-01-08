@@ -14,10 +14,15 @@ public class Health : MonoBehaviour
     [Header("Death")] [SerializeField] private bool DestroyOnDeath = true;
     [SerializeField] private float DestructionDelaay = 2f;
     [SerializeField] private GameObject InstantiateOnDeath;
+    [SerializeField] private bool FlashOnDamage = true;
+    [SerializeField] private Gradient DamageFlash;
+    [SerializeField] private float FlashDuration = 1f;
 
 
     protected KnockbackTaker _knockback;
+    protected SpriteRenderer _spriteRenderer;
     protected bool _isDead;
+    protected Color _originalColor;
 
     [SerializeField] public AudioClip deathAudio;
     [SerializeField] public AudioClip damageAudio;
@@ -34,28 +39,58 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float DmgAmt, GameObject instigator)
     {
-        CurrentHealth = Mathf.Clamp(CurrentHealth - DmgAmt, 0, MaxHealth);
+        CurrentHealth = Mathf.Clamp(CurrentHealth - DmgAmt * GetDamageMultiplier(this.gameObject), 0, MaxHealth);
         CheckIfDead();
         
         if (!_isDead)
         {
             AudioManager.Instance.PlayEffect(this.damageAudio);
-            _knockback?.TakeKnockback(gameObject.transform.position - instigator.transform.position, DmgAmt, 1f, 0f);
+            
         }
 
+        
         if (DmgAmt > 0)
         {
+            if (FlashOnDamage)
+            {
+                StartCoroutine(Flash());
+            }
             _animator?.SetTrigger("Hit");
-            Debug.Log("Sending hit trigger");
+            
         }
         
     }
 
+    private IEnumerator Flash()
+    {
+        if (!_spriteRenderer)
+            yield break;
+
+       
+        float TimeElapsed = 0f;
+        while (TimeElapsed < FlashDuration)
+        {
+            TimeElapsed += Time.deltaTime;
+            _spriteRenderer.color = DamageFlash.Evaluate(TimeElapsed / FlashDuration);
+            yield return null;
+        }
+
+        _spriteRenderer.color = _originalColor;
+    }
+
     public void TakeDamage(float DmgAmt, GameObject instigator, bool ApplyKnockback, float KnockbackMultiplier, Vector3 KnockbackDirection, float KnockbackDuration)
     {
-        CurrentHealth = Mathf.Clamp(CurrentHealth - DmgAmt, 0, MaxHealth);
+        CurrentHealth = Mathf.Clamp(CurrentHealth - DmgAmt * GetDamageMultiplier(this.gameObject), 0, MaxHealth);
+        bool wasDead = _isDead;
         CheckIfDead();
-
+        if (_isDead && !wasDead)
+        {
+            CharacterController c = instigator.GetComponent<CharacterController>();
+            if (c != null)
+            {
+                c.IncreaseKill(gameObject.tag);
+            }
+        }
         if (ApplyKnockback)
         {
             if (_knockback)
@@ -66,8 +101,18 @@ public class Health : MonoBehaviour
         if (DmgAmt > 0)
         {
             _animator?.SetTrigger("Hit");
-            Debug.Log("Sending hit trigger");
+            if (FlashOnDamage)
+            {
+                StartCoroutine(Flash());
+            }
         }
+    }
+
+    private int GetDamageMultiplier(GameObject damaged)
+    {
+        ForestAnimal a = damaged.GetComponent<ForestAnimal>();
+        if (a == null) return 1;
+        return a.GetIsUnprotected() ? 1 : 0 + 1;
     }
 
     private void CheckIfDead()
@@ -84,6 +129,7 @@ public class Health : MonoBehaviour
     {
         if (DestroyOnDeath)
         {
+            
             Destroy(this.gameObject, DestructionDelaay);
             // If this is the player, we can show the loss screen
         }
@@ -128,6 +174,8 @@ public class Health : MonoBehaviour
         _knockback = this.gameObject.GetComponent<KnockbackTaker>();
         _animator = this.gameObject.GetComponent<Animator>();
         _characterMovementManager = this.gameObject.GetComponent<CharacterMovementManager>();
+        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        _originalColor = _spriteRenderer.color;
     }
 
     // Start is called before the first frame update

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.VirtualTexturing;
@@ -32,11 +33,15 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float DashDuration = 1f;
     [SerializeField] private float DashMagnitude = 15f;
     [SerializeField] private float DashCooldown = 3f;
+    [SerializeField] private bool DamageOnDash = true;
+    [SerializeField] private float DashDamageAmount = 30f;
     [Header("HUD")] [SerializeField] private PlayerHUD PlayerHUD;
     
 
     protected float _currentMoveSpeed;
     protected float _dashCooldown;
+    protected List<GameObject> _damagedThisDash;
+    protected float _dashRemaining;
     protected Rigidbody2D _rigidbody2D;
     protected float _horizontalInput;
     protected float _verticalInput;
@@ -58,11 +63,15 @@ public class CharacterController : MonoBehaviour
     protected Renderer _renderer;
     protected MeleeAttacker _attacker;
     private CharacterState _characterState;
+    protected CircleCollider2D _myCollider;
     protected SnowGatherer _gatherer;
     protected bool _polledAudioInstance = false;
     protected Dialogue _currentDialogue;
-    
-    [SerializeField] public AudioClip[] backgroundAudios;
+
+    protected int _numBearKills;
+    protected int _numFoxKills;
+
+        [SerializeField] public AudioClip[] backgroundAudios;
     [SerializeField] public AudioClip slidingAudio;
 
     private void Awake()
@@ -70,8 +79,10 @@ public class CharacterController : MonoBehaviour
         _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         _movementVector = new Vector2();
         _lastMovementVector = new Vector2(-1, -1);
+        _lastInputVector = new Vector2(1, 1);
         _currentMoveSpeed = 0;
         _dashCooldown = 0;
+        _damagedThisDash = new List<GameObject>();
         _attacker = gameObject.GetComponent<MeleeAttacker>();
         _gatherer = gameObject.GetComponent<SnowGatherer>();
         _isFacingRight = true;
@@ -83,6 +94,8 @@ public class CharacterController : MonoBehaviour
         _canMove = true;
         _dialogueMode = false;
         _renderer = gameObject.GetComponent<Renderer>();
+        _numBearKills = _numFoxKills = 0;
+        _myCollider = gameObject.GetComponent<CircleCollider2D>();
     }
 
     public void DisableInput()
@@ -169,13 +182,44 @@ public class CharacterController : MonoBehaviour
             _dashCooldown -= Time.deltaTime;
         }
 
+        if (_dashRemaining > 0)
+        {
+            _dashRemaining = Mathf.Clamp(_dashRemaining - Time.deltaTime, 0, DashDuration);
+            if (_dashRemaining == 0)
+            {
+                _characterState = CharacterState.Normal;
+
+
+                if (_animator)
+                {
+                    _animator.SetBool("Sliding", false);
+                    _animator.SetTrigger("Idle");
+                }
+                
+                _myCollider.radius /= 1.5f;
+                _canChangeVelocity = true;
+                _rigidbody2D.velocity = _movementVector * _currentMoveSpeed;
+                _dashCooldown = DashCooldown;
+            }
+        }
+
         if (_characterState != CharacterState.Normal || _disabled) return;
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _canMove)
         {
             if (_dashCooldown <= 0)
             {
                 AudioManager.Instance.PlayEffect(this.slidingAudio);
-                StartCoroutine(Dash());
+                if (_animator)
+                {
+                    _animator.SetBool("Sliding", true);
+                }
+                _damagedThisDash.Clear();
+                _dashCooldown = DashCooldown + DashDuration;
+                _dashRemaining = DashDuration;
+                _myCollider.radius *= 1.5f;
+                _characterState = CharacterState.Dashing;
+                _canChangeVelocity = false;
+                _rigidbody2D.velocity = _lastInputVector * DashMagnitude;
             }
         }
 
@@ -210,6 +254,15 @@ public class CharacterController : MonoBehaviour
             }
         }
     }
+    
+    private IEnumerator Dash()
+    {
+        
+        
+       
+        yield return new WaitForSeconds(DashDuration);
+        
+    }
 
     public void BeginDialogue()
     {
@@ -219,11 +272,80 @@ public class CharacterController : MonoBehaviour
             PlayerHUD.panel.SetActive(true);
         }
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (_characterState == CharacterState.Dashing)
+        {
+            if (!DamageOnDash) return;
+            Health h = col.gameObject.GetComponent<Health>();
+            if (h != null && !_damagedThisDash.Contains(h.gameObject))
+            {
+                h.TakeDamage(DashDamageAmount, gameObject, true, 20f, _lastInputVector, 1f);
+                _damagedThisDash.Add(h.gameObject);
+            }
+
+            Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            pos.z = 0f;
+            Vector2 dir = pos - transform.position;
+            DashInDirection(dir);
+            
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (_characterState == CharacterState.Dashing)
+        {
+            if (!DamageOnDash) return;
+            Health h = collision.gameObject.GetComponent<Health>();
+            if (h != null && !_damagedThisDash.Contains(h.gameObject))
+            {
+                h.TakeDamage(DashDamageAmount, gameObject, true, 20f, _lastInputVector, 1f);
+                _damagedThisDash.Add(h.gameObject);
+            }
+        }
+    }
+
+    private void DashInDirection(Vector2 dir)
+    {
+        AudioManager.Instance.PlayEffect(this.slidingAudio);
+        if (_animator)
+        {
+            _animator.SetBool("Sliding", true);
+        }
+        _damagedThisDash.Clear();
+        _dashCooldown = DashCooldown + DashDuration;
+        _dashRemaining += DashDuration;
+        
+        _characterState = CharacterState.Dashing;
+        _canChangeVelocity = false;
+        _lastInputVector = dir.normalized;
+        _rigidbody2D.velocity = _lastInputVector * DashMagnitude;
+    }
+
+    public void EnteredPond()
+    {
+        
+    }
+
+    public void IncreaseKill(string tag)
+    {
+        if (tag == "Fox")
+        {
+            _numFoxKills++;
+        }else if (tag == "Bear")
+        {
+            _numBearKills++;
+        }
+        UpdateHUDKills();
+    }
 
     public void StopMovement()
     {
         _canMove = false;
+        _movementVector = new Vector2(0, 0);
+        _rigidbody2D.velocity = _movementVector;
     }
     
     public void SetGatheringSnow(bool isGathering)
@@ -248,7 +370,7 @@ public class CharacterController : MonoBehaviour
 
     private void HandleDiagonalDirection()
     {
-        if (_characterState != CharacterState.Normal)
+        if (_characterState != CharacterState.Normal && _characterState != CharacterState.Dashing)
         {
             return;
             
@@ -321,30 +443,7 @@ public class CharacterController : MonoBehaviour
 
     
 
-    private IEnumerator Dash()
-    {
-        
-        
-        if (_animator)
-        {
-            _animator.SetBool("Sliding", true);
-        }
-
-        _characterState = CharacterState.Dashing;
-        _canChangeVelocity = false;
-        _rigidbody2D.velocity = _lastInputVector * DashMagnitude;
-        yield return new WaitForSeconds(DashDuration);
-        _characterState = CharacterState.Normal;
-
-
-        if (_animator)
-        {
-            _animator.SetBool("Sliding", false);
-            _animator.SetTrigger("Idle");
-        }
-        _canChangeVelocity = true;
-        _dashCooldown = DashCooldown;
-    }
+    
 
     void HandleRotation()
     {
@@ -377,6 +476,22 @@ public class CharacterController : MonoBehaviour
         if (PlayerHUD)
         {
             PlayerHUD.SnowballText.text = _gatherer.NumSnowballs().ToString();
+        }
+    }
+
+    private void UpdateHUDKills()
+    {
+        if (PlayerHUD)
+        {
+            if (PlayerHUD.BearKills)
+            {
+                PlayerHUD.BearKills.SetText(_numBearKills.ToString());
+            }
+
+            if (PlayerHUD.FoxKills)
+            {
+                PlayerHUD.FoxKills.SetText(_numFoxKills.ToString());
+            }
         }
     }
 
