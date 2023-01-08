@@ -161,6 +161,7 @@ public class ForestAnimal : MonoBehaviour
         );
         if (hit.transform != _target)
         {
+            
             _target = null;
         }
     }
@@ -174,7 +175,7 @@ public class ForestAnimal : MonoBehaviour
         {
             if (c.gameObject.CompareTag("Player"))
             {
-                Debug.Log("Player found");
+                
                 if (CanBeObstructed)
                 {
                     Vector2 dir = c.transform.position - transform.position;
@@ -183,17 +184,17 @@ public class ForestAnimal : MonoBehaviour
                     );
                     if (hit.transform != c.transform)
                     {
-                        Debug.Log("Something in da wei");
+                        
                     }
                     else
                     {
-                        Debug.Log("Target found");
+                        
                         _target = c.transform;
                     }
                 }
                 else
                 {
-                    Debug.Log("banana");
+            
                     _target = c.transform;
                 }
             }
@@ -203,6 +204,7 @@ public class ForestAnimal : MonoBehaviour
 
     public void PauseMovement(bool stopVelo)
     {
+       
         _canMove = false;
         foreach (Collider2D c in gameObject.GetComponents<Collider2D>())
         {
@@ -272,10 +274,16 @@ public class ForestAnimal : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (_disabled) return;
+      
         if (col.gameObject.tag == "Player" && ChasesPlayer)
         {
             _target = col.gameObject.transform;
-            AudioManager.Instance.PlayEffect(this.alertAudio);
+    
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayEffect(this.alertAudio);
+            }
+            
             if (HasStandingAnim)
             {
                 StartCoroutine(Stand());

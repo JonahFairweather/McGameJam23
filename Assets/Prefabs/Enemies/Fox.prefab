@@ -125,15 +125,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f5bea6f7ab81144998c01defa3828a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkSpeed: 3
+  WalkSpeed: 2.5
   FlipsToMovement: 1
-  RunSpeed: 3
+  RunSpeed: 2.5
   LockToFourAxis: 1
   ChasesPlayer: 1
   CanBeObstructed: 1
   ObstructionLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1088
   AttacksPlayer: 1
   AttackDistance: 1.5
   DetectionRadius: 7

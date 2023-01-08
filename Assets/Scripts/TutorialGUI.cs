@@ -97,6 +97,7 @@ public class TutorialGUI : MonoBehaviour
     public void StartGame()
     {
         _character.EnableInput();
+        _animals = Object.FindObjectsOfType<ForestAnimal>();
         foreach (ForestAnimal f in _animals)
         {
             f.EnableAnimalBehavior();
