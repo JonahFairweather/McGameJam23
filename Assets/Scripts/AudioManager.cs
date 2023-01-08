@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 
 public class AudioManager : MonoBehaviour {
@@ -21,7 +22,14 @@ public class AudioManager : MonoBehaviour {
         } else if (Instance != this) {
             GameObject.Destroy(gameObject);
         }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        
     }
 
     // play the given audio clip through the effects source

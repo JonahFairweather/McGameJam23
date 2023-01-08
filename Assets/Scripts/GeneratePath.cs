@@ -18,15 +18,21 @@ public class GeneratePath : MonoBehaviour
     [Header("PathTiles")] [SerializeField] private GameObject PathTile;
     [SerializeField] private GameObject PathEdgeTile;
     [SerializeField] private GameObject VictoryTile;
+    [SerializeField] private bool GeneratePathAtAll;
 
     [Header("ForestGeneration")] [SerializeField]
     private GameObject[] ForestFolliage;
-
     [SerializeField] private bool GenerateForestProc = false;
-
     [SerializeField] private int NumCastsToMake;
     [SerializeField] private Vector2 XBounds;
-    [SerializeField] private Vector2 YBounds; 
+    [SerializeField] private Vector2 YBounds;
+
+    [Header("Snow Generation")] [SerializeField]
+    private List<GameObject> SnowObjects;
+    [SerializeField] private int NumCastsToMakeSnow = 300;
+    [SerializeField] private bool GenerateSnow = true;
+
+     
     
 
     private int xOffset = 0;
@@ -35,8 +41,39 @@ public class GeneratePath : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenerateNewPath();
+        if(GeneratePathAtAll) GenerateNewPath();
         if (GenerateForestProc) GenerateForest();
+        if (GenerateSnow) GenerateSnowProc();
+    }
+
+    public void GenerateSnowProc()
+    {
+        Vector3 Origin;
+        for (int i = 0; i < NumCastsToMakeSnow; i++)
+        {
+            float x = Random.Range(XBounds.x, XBounds.y);
+            float y = Random.Range(YBounds.x, YBounds.y);
+            Origin.x = x;
+            Origin.y = y;
+            Origin.z = 1;
+            if (!Physics.Raycast(Origin, Vector3.down, 2f))
+            {
+                Origin.z = 0;
+                int rdm = Random.Range(0, SnowObjects.Count);
+                GameObject newGameObj = Instantiate<GameObject>(SnowObjects[rdm], Origin, Quaternion.identity);
+                SetLayerBasedOnYValue(newGameObj);
+                newGameObj.transform.parent = this.gameObject.transform;
+            }
+        }
+    }
+
+    private void SetLayerBasedOnYValue(GameObject obj)
+    {
+        Renderer r = obj.GetComponent<Renderer>();
+        if (r != null)
+        {
+            r.sortingOrder = (int) r.transform.position.y * -1;
+        }
     }
 
     public void GenerateForest()
@@ -55,6 +92,7 @@ public class GeneratePath : MonoBehaviour
                 Origin.z = 0;
                 int rdm = Random.Range(0, ForestFolliage.Length);
                 GameObject newGameObj = Instantiate<GameObject>(ForestFolliage[rdm], Origin, Quaternion.identity);
+                SetLayerBasedOnYValue(newGameObj);
                 newGameObj.transform.parent = this.gameObject.transform;
             }
         }

@@ -43,7 +43,7 @@ public class CharacterController : MonoBehaviour
     protected Vector2 _lastMovementVector;
     protected Vector2 _lastInputVector;
     protected bool _canChangeVelocity = true;
-    
+    protected bool _canMove;
     
     protected bool _isFacingRight;
     protected bool _isFacingLeft;
@@ -53,7 +53,7 @@ public class CharacterController : MonoBehaviour
     private KeyCode _mostRecentlyPressed;
     private Directions _curDirection;
     protected Transform _meleeHitBoxLoc;
-
+    protected Renderer _renderer;
     protected MeleeAttacker _attacker;
     private CharacterState _characterState;
     protected SnowGatherer _gatherer;
@@ -76,7 +76,26 @@ public class CharacterController : MonoBehaviour
         _meleeHitBoxLoc = gameObject.transform.Find("WeaponHitBox");
         _characterState = CharacterState.Normal;
         AudioManager.Instance.PlayRandomMusic(this.backgroundAudios);
+        _canMove = true;
+        _renderer = gameObject.GetComponent<Renderer>();
     }
+
+    private void Start()
+    {
+        
+    }
+
+    public IEnumerator PauseMovementAndActions(float time)
+    {
+        _canMove = false;
+        _characterState = CharacterState.Gathering;
+        yield return new WaitForSeconds(time);
+        _characterState = CharacterState.Normal;
+        _rigidbody2D.velocity = new Vector2(0, 0);
+        _canMove = true;
+    }
+
+ 
 
     // Update is called once per frame
     void Update()
@@ -161,6 +180,11 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    public void StopMovement()
+    {
+        _canMove = false;
+    }
+    
     public void SetGatheringSnow(bool isGathering)
     {
         _characterState = isGathering ? CharacterState.Gathering : CharacterState.Normal;
@@ -227,14 +251,20 @@ public class CharacterController : MonoBehaviour
     private void LateUpdate()
     {
         HandleAcceleration();
-        
+        if (_renderer)
+        {
+            _renderer.sortingOrder = (int)transform.position.y * -1;
+        }
         Move();    
     }
 
     void Move()
     {
-        
-        
+
+        if (!_canMove)
+        {
+            return;
+        }
 
         if (_movementVector != new Vector2(0, 0))
         {
