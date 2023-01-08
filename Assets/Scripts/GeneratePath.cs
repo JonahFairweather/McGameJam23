@@ -7,6 +7,7 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class GeneratePath : MonoBehaviour
@@ -64,7 +65,7 @@ public class GeneratePath : MonoBehaviour
             if (Mathf.FloorToInt(FollowTransform.position.y) > YThreshold)
             {
                 YThreshold++;
-                if (YThreshold == 450)
+                if (YThreshold == PositiveYMax-50)
                 {
                     SpawnPenguinFamily();
                 }
@@ -76,20 +77,29 @@ public class GeneratePath : MonoBehaviour
 
     private void SpawnPenguinFamily()
     {
-        for (int i = -100; i < 101; i+=2)
+        StartCoroutine(SpawnFamily());
+    }
+
+    private IEnumerator SpawnFamily()
+    {
+
+        float x = Random.Range(-100, 100);
+        float y = Random.Range(PositiveYMax, PositiveYMax + 10);
+        for (int i = 0; i < 20; i++)
         {
-            for (int j = 500; j < 510; i += 10)
+            for (int j = 0; j < 10; j++)
             {
-                float xOffset = Random.Range(-10, 10);
-                float yOffset = Random.Range(-2, 2);
-                Vector3 Loc = new Vector3(i + xOffset, j + yOffset, 0);
+                Vector3 Loc = new Vector3(x, y, 0);
                 GameObject g = Instantiate(PenguinToSpawn, Loc, Quaternion.identity);
                 if (g != null)
                 {
                     g.GetComponent<SpriteRenderer>().flipX = Random.Range(0, 2) == 1;
                 }
             }
+
+            yield return null;
         }
+
     }
     
     private void GenerateStuffs(int YValue)
@@ -192,6 +202,20 @@ public class GeneratePath : MonoBehaviour
         if (GenerateForestProc) SpawnInitialForest();
         if (GenerateSnow) SpawnInitialSnow();
         if (SpawnAnimals) SpawnInitialAnimals();
+
+        BoxCollider2D c = gameObject.AddComponent<BoxCollider2D>();
+        c.offset = new Vector2(0, PositiveYMax);
+        c.size = new Vector2(200, 1);
+        c = gameObject.AddComponent<BoxCollider2D>();
+        c.offset = new Vector2(0, NegativeY);
+        c.size = new Vector2(200, 1);
+        c = gameObject.AddComponent<BoxCollider2D>();
+        c.offset = new Vector2(-100, (PositiveYMax + NegativeY)/2);
+        c.size = new Vector2(1, (PositiveYMax + Math.Abs(NegativeY)));
+        c = gameObject.AddComponent<BoxCollider2D>();
+        c.offset = new Vector2(100, (PositiveYMax + NegativeY)/2);
+        c.size = new Vector2(1, (PositiveYMax + Math.Abs(NegativeY)));
+
     }
 
     public void SpawnInitialForest()
