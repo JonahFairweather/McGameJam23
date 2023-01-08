@@ -48,14 +48,14 @@ public class Health : MonoBehaviour
             
         }
 
-        
+        _animator?.SetTrigger("Hit");
         if (DmgAmt > 0)
         {
             if (FlashOnDamage)
             {
                 StartCoroutine(Flash());
             }
-            _animator?.SetTrigger("Hit");
+           
             
         }
         

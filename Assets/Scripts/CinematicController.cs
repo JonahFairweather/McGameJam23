@@ -26,6 +26,7 @@ public class CinematicController : MonoBehaviour
     [SerializeField] private String LoadOnceDone;
 
     [SerializeField] public SceneTransition sceneTransition;
+    [SerializeField] public KeyCode skipKeycode = KeyCode.Space;
     
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,12 @@ public class CinematicController : MonoBehaviour
         if (!_polled)
         {
             PollAudioPlayer();
+        }
+
+        if (Input.GetKeyDown(skipKeycode))
+        {
+            StopAllCoroutines();
+            sceneTransition.LoadNewScene(LoadOnceDone);
         }
     }
 
@@ -60,6 +67,7 @@ public class CinematicController : MonoBehaviour
         _spriteRenderer.sprite = SpriteList[i];
         i++;
         float timeperframe = CinematicTheme.length / SpriteList.Count;
+        
         yield return new WaitForSeconds(timeperframe);
         while (i < SpriteList.Count)
         {
