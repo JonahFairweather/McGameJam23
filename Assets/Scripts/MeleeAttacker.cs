@@ -18,6 +18,10 @@ public class MeleeAttacker : MonoBehaviour
 
     [SerializeField] private float AttackCooldown = 2f;
     [SerializeField] private float TimeBeforeEnableDamage = 0f;
+
+    [Header("Knockback")] [SerializeField] private bool AppliesKnockback = true;
+    [SerializeField] private float KnockbackMultiplier = 2f;
+    [SerializeField] private float KnockbackDuration = 1f;
     
 
 
@@ -54,6 +58,7 @@ public class MeleeAttacker : MonoBehaviour
         if (_animator)
         {
             _animator.SetTrigger("Attacking");
+            _animator.SetTrigger("Attack");
         }
 
         if (TimeBeforeEnableDamage > 0)
@@ -86,11 +91,16 @@ public class MeleeAttacker : MonoBehaviour
                 Health h = c.gameObject.GetComponent<Health>();
                 if (h != null)
                 {
-                    h.TakeDamage(DamageAmount, gameObject);
+                    h.TakeDamage(DamageAmount, gameObject, AppliesKnockback, KnockbackMultiplier, c.gameObject.transform.position - transform.position, KnockbackDuration);
                 }
             }
         }
         
+    }
+
+    public void SetLocalPos(Vector2 pos)
+    {
+        DamageLocation.localPosition = pos;
     }
 
     private void OnDrawGizmos()

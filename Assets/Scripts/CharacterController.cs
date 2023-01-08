@@ -78,19 +78,27 @@ public class CharacterController : MonoBehaviour
         _renderer = gameObject.GetComponent<Renderer>();
     }
 
-    private void Start() {
-        while(AudioManager.Instance != null);
-        AudioManager.Instance.PlayMusic(this.backgroundAudio);
+    private void Start()
+    {
+        
     }
+
+    public IEnumerator PauseMovementAndActions(float time)
+    {
+        _canMove = false;
+        _characterState = CharacterState.Gathering;
+        yield return new WaitForSeconds(time);
+        _characterState = CharacterState.Normal;
+        _rigidbody2D.velocity = new Vector2(0, 0);
+        _canMove = true;
+    }
+
+ 
 
     // Update is called once per frame
     void Update()
     {
-
-        if (_renderer)
-        {
-            _renderer.sortingOrder = (int)transform.position.y;
-        }
+        
         
         HandleDiagonalDirection();
         if (_animator && _canChangeVelocity)
@@ -240,7 +248,10 @@ public class CharacterController : MonoBehaviour
     private void LateUpdate()
     {
         HandleAcceleration();
-        
+        if (_renderer)
+        {
+            _renderer.sortingOrder = (int)transform.position.y * -1;
+        }
         Move();    
     }
 

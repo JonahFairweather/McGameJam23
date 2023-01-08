@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 982504253356788336}
   - component: {fileID: 982504253356788339}
   - component: {fileID: 982504253356788338}
-  - component: {fileID: 982504253356788341}
   - component: {fileID: 982504253356788348}
   - component: {fileID: 2680922750369765663}
   - component: {fileID: 798455459604113342}
+  - component: {fileID: 1003967352}
   m_Layer: 9
   m_Name: Fox
   m_TagString: Untagged
@@ -128,11 +128,13 @@ MonoBehaviour:
   WalkSpeed: 4
   FlipsToMovement: 1
   RunSpeed: 5
+  LockToFourAxis: 1
   ChasesPlayer: 1
   CanBeObstructed: 0
   AttacksPlayer: 0
   AttackDistance: 1
   DetectionRadius: 2
+  HasStandingAnim: 1
   RunsFromPlayer: 0
 --- !u!114 &982504253356788339
 MonoBehaviour:
@@ -151,6 +153,7 @@ MonoBehaviour:
   InitialHealth: 100
   DestroyOnDeath: 1
   DestructionDelaay: 2
+  InstantiateOnDeath: {fileID: 0}
 --- !u!58 &982504253356788338
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -167,22 +170,6 @@ CircleCollider2D:
   m_Offset: {x: -0.13140213, y: -0.26280475}
   serializedVersion: 2
   m_Radius: 0.66829324
---- !u!58 &982504253356788341
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982504253356788340}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 6
 --- !u!50 &982504253356788348
 Rigidbody2D:
   serializedVersion: 4
@@ -220,7 +207,7 @@ MonoBehaviour:
   DamageLocation: {fileID: 4161352971321156007}
   CircleRadius: 0.75
   AttackCooldown: 2
-  TimeBeforeEnableDamage: 0.2
+  TimeBeforeEnableDamage: 0.3
 --- !u!114 &798455459604113342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +220,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a2d5e7980fcf44ebcc51e07e23cfda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1003967352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982504253356788340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0ea29d5f15ec5945889ce5a77bcede4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KnockbackMultiplier: 0.01
+  VelocityPauseTime: 0.5
 --- !u!1 &2122803951727730800
 GameObject:
   m_ObjectHideFlags: 0

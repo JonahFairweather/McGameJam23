@@ -49,7 +49,7 @@ public class GeneratePath : MonoBehaviour
     public void GenerateSnowProc()
     {
         Vector3 Origin;
-        for (int i = 0; i < NumCastsToMake; i++)
+        for (int i = 0; i < NumCastsToMakeSnow; i++)
         {
             float x = Random.Range(XBounds.x, XBounds.y);
             float y = Random.Range(YBounds.x, YBounds.y);
@@ -72,7 +72,7 @@ public class GeneratePath : MonoBehaviour
         Renderer r = obj.GetComponent<Renderer>();
         if (r != null)
         {
-            r.sortingOrder = (int) r.transform.position.y;
+            r.sortingOrder = (int) r.transform.position.y * -1;
         }
     }
 
