@@ -24,6 +24,9 @@ public class CinematicController : MonoBehaviour
     [SerializeField] private AudioClip CinematicTheme;
 
     [SerializeField] private String LoadOnceDone;
+
+    [SerializeField] public SceneTransition sceneTransition;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +68,6 @@ public class CinematicController : MonoBehaviour
             yield return new WaitForSecondsRealtime(timeperframe);
         }
 
-        SceneManager.LoadScene(LoadOnceDone);
+        this.sceneTransition.LoadNewScene(this.LoadOnceDone);
     }
 }
