@@ -58,6 +58,7 @@ public class CharacterController : MonoBehaviour
     private CharacterState _characterState;
     protected SnowGatherer _gatherer;
     
+    [SerializeField] public AudioClip backgroundAudio;
 
     private void Awake()
     {
@@ -73,6 +74,11 @@ public class CharacterController : MonoBehaviour
         _animator = gameObject.GetComponent<Animator>();
         _meleeHitBoxLoc = gameObject.transform.Find("WeaponHitBox");
         _characterState = CharacterState.Normal;
+    }
+
+    private void Start() {
+        while(AudioManager.Instance != null);
+        AudioManager.Instance.PlayMusic(this.backgroundAudio);
     }
 
     // Update is called once per frame

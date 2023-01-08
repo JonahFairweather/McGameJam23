@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6031279707606381379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.731, y: -0.493, z: 0}
+  m_LocalPosition: {x: -0.75, y: -0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 179220818}
   - component: {fileID: 179220817}
   - component: {fileID: 179220819}
+  - component: {fileID: 179220820}
   m_Layer: 6
   m_Name: MainCharacter
   m_TagString: Player
@@ -140,6 +141,8 @@ MonoBehaviour:
   DashDuration: 0.5
   DashMagnitude: 8
   DashCooldown: 3
+  PlayerHUD: {fileID: 0}
+  backgroundAudio: {fileID: 0}
 --- !u!114 &6533574284968119276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +310,7 @@ MonoBehaviour:
   MaxHealth: 100
   InitialHealth: 100
   DestroyOnDeath: 1
+  DestructionDelaay: 2
 --- !u!114 &179220819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +325,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageAmount: 10
   DamageLocation: {fileID: 5226791407786291247}
-  CircleRadius: 0.5
+  CircleRadius: 0.75
   AttackCooldown: 0.8
   TimeBeforeEnableDamage: 0
+--- !u!114 &179220820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533574284968119283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbcdb67614eb07e4e9458292c8be5fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingSnowballs: 0
+  CurrentSnowballs: 0
+  MaxSwowballs: 5
+  CooldownTime: 1.5
+  TimeBeforeThrow: 0.5
+  MaxAngle: 45
+  SpawnLocation: {fileID: 5226791407786291247}
+  SnowballToSpawn: {fileID: 2384172929500873947, guid: 0e402ce4f12a345d6b4afe8c09c4a92d, type: 3}
+  gatherSnowAudio: {fileID: 8300000, guid: c294f316c8f884c9391d61a7621b569b, type: 3}
+  throwSnowAudio: {fileID: 8300000, guid: 33eec4aa0b2624de9bc81ad1434954ef, type: 3}

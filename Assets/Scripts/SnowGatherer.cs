@@ -21,6 +21,8 @@ public class SnowGatherer : MonoBehaviour
     [SerializeField] private float MaxAngle = 45f;
     [SerializeField] private Transform SpawnLocation;
     [SerializeField] private Snowball SnowballToSpawn;
+    [SerializeField] public AudioClip gatherSnowAudio;
+    [SerializeField] public AudioClip throwSnowAudio;
     
 
     protected CharacterController _character;
@@ -68,6 +70,7 @@ public class SnowGatherer : MonoBehaviour
                 CurrentSnowballs -= 1;
                 _character?.UpdateHUDSnowballs();
                 
+                AudioManager.Instance.PlayEffect(throwSnowAudio);
                 StartCoroutine(_character.AttackFinished(0.16f));
 
             }
@@ -86,6 +89,7 @@ public class SnowGatherer : MonoBehaviour
             _character.SetGatheringSnow(true);
         }
 
+        AudioManager.Instance.PlayEffect(gatherSnowAudio);
         StartCoroutine(SetCanInterrupt(0.66f));
     }
 

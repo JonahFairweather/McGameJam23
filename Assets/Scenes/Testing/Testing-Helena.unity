@@ -309,36 +309,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SnowballText: {fileID: 929358922}
---- !u!1 &179220810 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6533574284968119283, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
-  m_PrefabInstance: {fileID: 1915762186}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &179220816 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6533574284968119273, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
   m_PrefabInstance: {fileID: 1915762186}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &179220820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179220810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbcdb67614eb07e4e9458292c8be5fa4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartingSnowballs: 0
-  CurrentSnowballs: 0
-  MaxSwowballs: 5
-  CooldownTime: 1.5
-  TimeBeforeThrow: 0.5
-  MaxAngle: 45
-  SpawnLocation: {fileID: 1878522083}
-  SnowballToSpawn: {fileID: 2384172929500873947, guid: 0e402ce4f12a345d6b4afe8c09c4a92d, type: 3}
 --- !u!1 &411004915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,11 +1016,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!4 &1878522083 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5226791407786291247, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
-  m_PrefabInstance: {fileID: 1915762186}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1915762186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1053,18 +1023,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 179220819, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
-      propertyPath: CircleRadius
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5226791407786291247, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5226791407786291247, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 6533574284968119273, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1113,6 +1071,10 @@ PrefabInstance:
       propertyPath: PlayerHUD
       value: 
       objectReference: {fileID: 103622009}
+    - target: {fileID: 6533574284968119279, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
+      propertyPath: backgroundAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: d3e482d0457fb4923b66faeafc80cc09, type: 3}
     - target: {fileID: 6533574284968119283, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
       propertyPath: m_Name
       value: JimboThePenguin
