@@ -205,7 +205,11 @@ public class CharacterController : MonoBehaviour
         {
             if (_dashCooldown <= 0)
             {
-                AudioManager.Instance.PlayEffect(this.slidingAudio);
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayEffect(this.slidingAudio);
+                }
+                
                 if (_animator)
                 {
                     _animator.SetBool("Sliding", true);

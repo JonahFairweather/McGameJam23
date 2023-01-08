@@ -43,6 +43,11 @@ public class PenguinDead : MonoBehaviour {
         Scene currScene = SceneManager.GetActiveScene();
         Time.timeScale = 1f;
         this.sceneTransition.LoadNewScene(currScene.name);
+        AudioSource[] sources = Object.FindObjectsOfType<AudioSource>();
+        foreach (AudioSource s in sources)
+        {
+            s.Stop();
+        }
     }
 
     public void Home() {

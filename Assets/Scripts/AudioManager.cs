@@ -41,6 +41,7 @@ public class AudioManager : MonoBehaviour {
 
     // play the given audio clip through the music source
     public void PlayMusic(AudioClip clip) {
+        MusicSource.Stop();
         MusicSource.clip = clip;
         this.MusicSource.Play();
     }

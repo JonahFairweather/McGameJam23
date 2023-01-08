@@ -49,6 +49,8 @@ public class GeneratePath : MonoBehaviour
     protected Queue<GameObject> _spawnedAnimals;
     protected Queue<GameObject> _snowObjects;
     protected Queue<GameObject> _forestObjects;
+
+    [SerializeField] private AudioClip VictoryMusic;
     
     
 
@@ -84,7 +86,7 @@ public class GeneratePath : MonoBehaviour
         StartCoroutine(SpawnFamily());
         BoxCollider2D victory = gameObject.AddComponent<BoxCollider2D>();
         victory.isTrigger = true;
-        victory.offset = new Vector2(0, PositiveYMax+ 5);
+        victory.offset = new Vector2(0, PositiveYMax);
         victory.size = new Vector2(200, 10);
 
 
@@ -92,11 +94,15 @@ public class GeneratePath : MonoBehaviour
 
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<CharacterController>() != null)
         {
             other.GetComponent<CharacterController>().Win();
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayMusic(VictoryMusic);
+            }
         }
     }
 
