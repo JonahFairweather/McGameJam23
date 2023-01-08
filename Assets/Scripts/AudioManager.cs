@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour {
 	private float highPitchRange = 1.05f;
     private float fadeOutDuration = 3f;
 
+    private float volume = 1f;
+
     private void Awake() { 
         if (Instance == null) {
             Instance = this;
@@ -55,10 +57,20 @@ public class AudioManager : MonoBehaviour {
     public void PlayRandomMusic(params AudioClip[] clips) {
         int randomIndex = Random.Range(0, clips.Length);
 		MusicSource.clip = clips[randomIndex];
-		StartCoroutine(FadeOutMusic());
+		MusicSource.Play();
     }
 
     public bool IsPlayingMusic() {
         return MusicSource.isPlaying;
+    }
+
+    public void SetVolume(float volumeLevel) {
+        this.volume = Mathf.Clamp(volumeLevel, 0f, 1f);
+        this.MusicSource.volume = this.volume;
+        this.EffectsSource.volume = this.volume;
+    }
+
+    public float GetVolume() {
+        return this.volume;
     }
 }

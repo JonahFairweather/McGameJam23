@@ -77,11 +77,13 @@ public class MainMenu : MonoBehaviour {
 
     public void VolumeUp()
     {
-        //INCREASE VOLUME
+        //INCREASE VOLUME by 10%
+        AudioManager.Instance.SetVolume(AudioManager.Instance.GetVolume() + 0.1f);
     }
 
     public void VolumeDown()
     {
-        //DECREASE VOLUME
+        //DECREASE VOLUME by 10%
+        AudioManager.Instance.SetVolume(AudioManager.Instance.GetVolume() - 0.1f);
     }
 }

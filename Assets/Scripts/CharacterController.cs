@@ -71,7 +71,7 @@ public class CharacterController : MonoBehaviour
     protected int _numBearKills;
     protected int _numFoxKills;
 
-        [SerializeField] public AudioSource backgroundAudios;
+    [SerializeField] public AudioClip[] backgroundAudios;
     [SerializeField] public AudioClip slidingAudio;
 
     private void Awake()
@@ -96,7 +96,6 @@ public class CharacterController : MonoBehaviour
         _renderer = gameObject.GetComponent<Renderer>();
         _numBearKills = _numFoxKills = 0;
         _myCollider = gameObject.GetComponent<CircleCollider2D>();
-        backgroundAudios.Play();
     }
 
     public void DisableInput()
