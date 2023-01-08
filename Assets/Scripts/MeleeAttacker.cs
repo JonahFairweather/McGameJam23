@@ -92,7 +92,7 @@ public class MeleeAttacker : MonoBehaviour
             AudioManager.Instance.PlayEffect(this.enemyPeckingAudio);
         }
         Collider2D[] overlapped = Physics2D.OverlapCircleAll(DamageLocation.position, CircleRadius);
-        
+        Debug.Log(overlapped.Length);
         foreach(Collider2D c in overlapped)
         {
             if (c.gameObject != gameObject)

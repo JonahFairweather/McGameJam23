@@ -120,10 +120,10 @@ TextureImporter:
       name: foxrunning-Sheet_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 2
-        width: 31
-        height: 30
+        x: 0
+        y: 0
+        width: 36
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,7 +131,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 736336f9e657da440ae6c24018afbc47
+      spriteID: e305811c287b8da4b98cffff202a3b55
       internalID: 993319628
       vertices: []
       indices: 
@@ -152,7 +152,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c07dd3f502d1dc14b9822a6447a4b601
+      spriteID: 9e2287cfd1c75c3419e35c7266db90e8
       internalID: 35035359
       vertices: []
       indices: 
@@ -162,10 +162,10 @@ TextureImporter:
       name: foxrunning-Sheet_2
       rect:
         serializedVersion: 2
-        x: 78
+        x: 72
         y: 0
-        width: 30
-        height: 28
+        width: 36
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,7 +173,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6985e8350b84974fabbd6af77b6ffac
+      spriteID: d0786f838a581b847938119eb5b27977
       internalID: 1392198259
       vertices: []
       indices: 
@@ -183,10 +183,10 @@ TextureImporter:
       name: foxrunning-Sheet_3
       rect:
         serializedVersion: 2
-        x: 113
-        y: 2
-        width: 29
-        height: 24
+        x: 108
+        y: 0
+        width: 36
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,7 +194,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1976881fdf575d4399471a7e7aff9ac
+      spriteID: 63290b990af4423408fff383f0655b02
       internalID: 2057582205
       vertices: []
       indices: 
@@ -204,10 +204,10 @@ TextureImporter:
       name: foxrunning-Sheet_4
       rect:
         serializedVersion: 2
-        x: 150
-        y: 2
-        width: 24
-        height: 24
+        x: 144
+        y: 0
+        width: 36
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,7 +215,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8f8155fcaeb19e48ba96b3f1d459d93
+      spriteID: c1fb366c3fc5ca3438dcba31d9647edc
       internalID: -943314060
       vertices: []
       indices: 

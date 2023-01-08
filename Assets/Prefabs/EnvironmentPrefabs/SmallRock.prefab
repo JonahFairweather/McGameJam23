@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4077256909205452513}
   - component: {fileID: 8496921011344898467}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SmallRockSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5596054716092139647}
   - component: {fileID: 5078333427778989592}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SmallRockShadowSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4302744708477033401}
   - component: {fileID: 6294582930228044565}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SmallRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

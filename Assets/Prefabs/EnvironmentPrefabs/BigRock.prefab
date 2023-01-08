@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 650770460070091129}
   - component: {fileID: 8147123112849607909}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BigRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2898676187661957757}
   - component: {fileID: 1824720888229478494}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BigRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4256239927162981858}
   - component: {fileID: 2432002045115717811}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

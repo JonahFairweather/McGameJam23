@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.VirtualTexturing;
@@ -44,11 +45,12 @@ public class CharacterController : MonoBehaviour
     protected Vector2 _lastInputVector;
     protected bool _canChangeVelocity = true;
     protected bool _canMove;
-    
+    protected bool _disabled;
     protected bool _isFacingRight;
     protected bool _isFacingLeft;
     protected bool _isFacingUp;
     protected bool _isFacingDown;
+    protected bool _dialogueMode;
     protected Animator _animator;
     private KeyCode _mostRecentlyPressed;
     private Directions _curDirection;
@@ -57,6 +59,8 @@ public class CharacterController : MonoBehaviour
     protected MeleeAttacker _attacker;
     private CharacterState _characterState;
     protected SnowGatherer _gatherer;
+    protected bool _polledAudioInstance = false;
+    protected Dialogue _currentDialogue;
     
     [SerializeField] public AudioClip[] backgroundAudios;
     [SerializeField] public AudioClip slidingAudio;
@@ -75,9 +79,20 @@ public class CharacterController : MonoBehaviour
         _animator = gameObject.GetComponent<Animator>();
         _meleeHitBoxLoc = gameObject.transform.Find("WeaponHitBox");
         _characterState = CharacterState.Normal;
-        AudioManager.Instance.PlayRandomMusic(this.backgroundAudios);
+        _disabled = false;
         _canMove = true;
+        _dialogueMode = false;
         _renderer = gameObject.GetComponent<Renderer>();
+    }
+
+    public void DisableInput()
+    {
+        _disabled = true;
+    }
+
+    public void EnableInput()
+    {
+        _disabled = false;
     }
 
     private void Start()
@@ -95,14 +110,30 @@ public class CharacterController : MonoBehaviour
         _canMove = true;
     }
 
- 
 
+    void PollAudioInstance()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayRandomMusic(this.backgroundAudios);
+            _polledAudioInstance = true;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        HandleBackgroundMusic();
+        if (!_polledAudioInstance)
+        {
+            PollAudioInstance();
+        }
 
-        HandleDiagonalDirection();
+        if (AudioManager.Instance != null)
+        {
+            HandleBackgroundMusic();
+        }
+        
+
+        if(!_disabled) HandleDiagonalDirection();
         if (_animator && _canChangeVelocity)
         {
             _animator.SetFloat("Horizontal", _movementVector.x);
@@ -138,7 +169,7 @@ public class CharacterController : MonoBehaviour
             _dashCooldown -= Time.deltaTime;
         }
 
-        if (_characterState != CharacterState.Normal) return;
+        if (_characterState != CharacterState.Normal || _disabled) return;
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (_dashCooldown <= 0)
@@ -179,6 +210,16 @@ public class CharacterController : MonoBehaviour
             }
         }
     }
+
+    public void BeginDialogue()
+    {
+        _dialogueMode = false;
+        if (PlayerHUD)
+        {
+            PlayerHUD.panel.SetActive(true);
+        }
+    }
+    
 
     public void StopMovement()
     {

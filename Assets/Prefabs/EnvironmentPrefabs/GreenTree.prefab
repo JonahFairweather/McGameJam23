@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6221299696929457248}
   - component: {fileID: 5400060384214902118}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GreeTreeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5258224842160645600}
   - component: {fileID: 2226729555338436591}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GreenTreeShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 366919363038257731}
   - component: {fileID: 3263067707899351155}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GreenTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}

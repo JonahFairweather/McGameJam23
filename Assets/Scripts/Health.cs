@@ -87,7 +87,7 @@ public class Health : MonoBehaviour
             Destroy(this.gameObject, DestructionDelaay);
             // If this is the player, we can show the loss screen
         }
-
+        
         if (_characterMovementManager)
         {
             _characterMovementManager.StopAllMovement();
@@ -120,6 +120,8 @@ public class Health : MonoBehaviour
             }
         }
     }
+    
+    
 
     private void Awake()
     {

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1928228307399816793}
   - component: {fileID: 1402868266625198892}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DeadTreeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2894123314825340993}
   - component: {fileID: 7976058760261478636}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DeadTreeShadowSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1556645856369597926}
   - component: {fileID: 6458639711609804103}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DeadTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}

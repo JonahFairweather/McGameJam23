@@ -16,6 +16,7 @@ public class ForestAnimal : MonoBehaviour
 
     [Header("Behavior")] [SerializeField] private bool ChasesPlayer;
     [SerializeField] private bool CanBeObstructed = false;
+    [SerializeField] public LayerMask ObstructionLayers;
     [SerializeField] private bool AttacksPlayer;
     
     [SerializeField] private float AttackDistance = 1f;
@@ -30,7 +31,7 @@ public class ForestAnimal : MonoBehaviour
     protected bool isSitting;
     protected bool _canMove;
     protected Animator _animator;
-
+    protected bool _disabled;
     protected MeleeAttacker _attacker;
     protected SpriteRenderer _renderer;
     protected Rigidbody2D _rigidbody2D;
@@ -63,6 +64,11 @@ public class ForestAnimal : MonoBehaviour
     void Update()
     {
         
+        if (_renderer)
+        {
+            _renderer.sortingOrder = (int)transform.position.y * -1;
+        }
+        
         if (FlipsToMovement)
         {
             if (_rigidbody2D.velocity.x > 0)
@@ -81,6 +87,11 @@ public class ForestAnimal : MonoBehaviour
         if (_attacker)
         {
             _attacker.SetLocalPos(_lastInputVector);
+        }
+
+        if (_target != null && CanBeObstructed)
+        {
+            CheckIfTargetObstructed();
         }
         
         _animator.SetFloat("LastHorizontal", _lastInputVector.x);
@@ -106,6 +117,31 @@ public class ForestAnimal : MonoBehaviour
         }
         
         
+    }
+
+    public void DisableAnimalBehavior()
+    {
+        _canMove = false;
+        _target = null;
+        _disabled = true;
+    }
+
+    private void CheckIfTargetObstructed()
+    {
+        Vector2 dir = _target.position - transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + (Vector3) dir * 1f , _target.position - transform.position,
+            DetectionRadius + 5f, ObstructionLayers
+        );
+        if (hit.transform != _target)
+        {
+            _target = null;
+        }
+    }
+
+    public void EnableAnimalBehavior()
+    {
+        _canMove = true;
+        _disabled = false;
     }
 
     public void PauseMovement(bool stopVelo)
@@ -141,7 +177,7 @@ public class ForestAnimal : MonoBehaviour
         }
         Vector3 dir = _target.position - transform.position;
         dir.z = 0;
-        if (dir.magnitude < AttackDistance/2f)
+        if (dir.magnitude < AttackDistance - 0.3f)
         {
             _rigidbody2D.velocity = new Vector2(0, 0);
             return;
@@ -178,6 +214,7 @@ public class ForestAnimal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (_disabled) return;
         if (col.gameObject.tag == "Player" && ChasesPlayer)
         {
             _target = col.gameObject.transform;

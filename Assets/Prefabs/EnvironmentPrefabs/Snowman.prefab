@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6406731351594644165}
   - component: {fileID: 3951115994698889201}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Snowman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2867999895643945955}
   - component: {fileID: 7616349912507006896}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SnowmanSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6234065944126582751}
   - component: {fileID: 5128861497677622860}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SnowmanSpriteShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

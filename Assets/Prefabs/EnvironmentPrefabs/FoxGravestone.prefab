@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3087107513223447472}
   - component: {fileID: 5611538247250431054}
   - component: {fileID: 2881726735700358277}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FoxGravestone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3333801512308529134}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FoxGravestone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

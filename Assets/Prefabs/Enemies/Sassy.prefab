@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 9091758822117534594}
   m_Layer: 9
   m_Name: Sassy
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,10 +126,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WalkSpeed: 4
   FlipsToMovement: 0
-  RunSpeed: 4
+  RunSpeed: 2
   LockToFourAxis: 1
   ChasesPlayer: 1
   CanBeObstructed: 0
+  ObstructionLayers:
+    serializedVersion: 2
+    m_Bits: 0
   AttacksPlayer: 1
   AttackDistance: 2
   DetectionRadius: 5
@@ -148,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82ff0201ca90d241a14f0a728820515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageAmount: 0
+  DamageAmount: 34
   DamageLocation: {fileID: 1810443586042086174}
   CircleRadius: 1.5
   AttackCooldown: 2

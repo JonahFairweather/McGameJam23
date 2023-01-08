@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3416247468053860818}
   - component: {fileID: 7338849836968682624}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WinterTreeShadowSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 75601589344365222}
   - component: {fileID: 8078001974124219629}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WinterTreeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1999952104002359472}
   - component: {fileID: 2897573974357971993}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WinterTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}

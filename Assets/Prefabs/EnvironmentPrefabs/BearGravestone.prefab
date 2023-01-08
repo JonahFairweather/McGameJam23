@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4882156119416211300}
   - component: {fileID: 5785070628331938284}
   - component: {fileID: 7611126706767200086}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BearGravestone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8160602303328686982}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BearGravestone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

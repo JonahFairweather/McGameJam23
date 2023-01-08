@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6666393624844322904}
   - component: {fileID: 4965564195894003286}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OwlTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 7655087703283284131}
   - component: {fileID: 58479595734786836}
   - component: {fileID: 4464077946172924693}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OwnTreeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 3139521236817788067}
   - component: {fileID: 7343772348866507206}
   - component: {fileID: 1251090177711879168}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OwlTreeShadowSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

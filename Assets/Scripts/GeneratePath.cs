@@ -32,10 +32,17 @@ public class GeneratePath : MonoBehaviour
     [SerializeField] private int NumCastsToMakeSnow = 300;
     [SerializeField] private bool GenerateSnow = true;
 
-     
-    
+    [Header("Animal Spawning")] [SerializeField]
+    private bool SpawnAnimals = true;
+
+    [SerializeField] private List<ForestAnimal> _animals;
+    [SerializeField] private int NumRequiredAnimalsSpawned = 30;
+
+
+
 
     private int xOffset = 0;
+    public 
     
     
     // Start is called before the first frame update
@@ -44,8 +51,31 @@ public class GeneratePath : MonoBehaviour
         if(GeneratePathAtAll) GenerateNewPath();
         if (GenerateForestProc) GenerateForest();
         if (GenerateSnow) GenerateSnowProc();
+        if (SpawnAnimals) SpawnAnimalsProc();
     }
 
+    public void SpawnAnimalsProc()
+    {
+        Vector3 Origin;
+        int numSuccesses = 0;
+        while (numSuccesses < NumRequiredAnimalsSpawned)
+        {
+            float x = Random.Range(XBounds.x, XBounds.y);
+            float y = Random.Range(YBounds.x, YBounds.y);
+            Origin.x = x;
+            Origin.y = y;
+            Origin.z = 1;
+            if (!Physics.Raycast(Origin, Vector3.down, 2f))
+            {
+                Origin.z = 0;
+                int rdm = Random.Range(0, _animals.Count);
+                GameObject newGameObj = Instantiate<GameObject>(_animals[rdm].gameObject, Origin, Quaternion.identity);
+                
+                newGameObj.transform.parent = this.gameObject.transform;
+                numSuccesses++;
+            }
+        }
+    }
     public void GenerateSnowProc()
     {
         Vector3 Origin;

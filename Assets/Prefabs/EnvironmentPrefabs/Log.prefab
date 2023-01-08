@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7313677288496781498}
   - component: {fileID: 2544651092826370556}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LogShadowSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8731106023395534205}
   - component: {fileID: 704930147118165374}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LogSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 320487398382842930}
   - component: {fileID: 6548269989177192742}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Log
   m_TagString: Untagged
   m_Icon: {fileID: 0}
