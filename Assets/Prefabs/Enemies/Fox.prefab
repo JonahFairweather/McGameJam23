@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f5bea6f7ab81144998c01defa3828a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkSpeed: 4
+  WalkSpeed: 3
   FlipsToMovement: 1
   RunSpeed: 3
   LockToFourAxis: 1
