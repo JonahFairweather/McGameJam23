@@ -107,6 +107,10 @@ MonoBehaviour:
   DamageAmount: 5
   MaximumLifetime: 20
   Owner: {fileID: 0}
+  DamageAmount: 5
+  snowballCollisionWithAnimal: {fileID: 8300000, guid: d4cb675b14d064e309fbeed773cde21c, type: 3}
+  snowballCollisionWithObstacle: {fileID: 8300000, guid: 4d169d26b56fe4a7faad6cf2f2542e8d, type: 3}
+  Owner: {fileID: 0}
 --- !u!58 &3393097894611355309
 CircleCollider2D:
   m_ObjectHideFlags: 0

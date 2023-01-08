@@ -3,26 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
-{
+public class MainMenu : MonoBehaviour {
     [SerializeField] public string gameScene;
     [SerializeField] public GameObject howToPlayScreen; 
     [SerializeField] public GameObject settingsScreen;
+
     [SerializeField] public AudioClip backgroundAudio;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         this.howToPlayScreen.SetActive(false);
         this.settingsScreen.SetActive(false);
-        while(AudioManager.Instance != null);
         AudioManager.Instance.PlayMusic(this.backgroundAudio);
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() {
     }
 
     public void StartGame() {

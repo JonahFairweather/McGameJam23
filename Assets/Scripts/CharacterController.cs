@@ -58,7 +58,8 @@ public class CharacterController : MonoBehaviour
     private CharacterState _characterState;
     protected SnowGatherer _gatherer;
     
-    [SerializeField] public AudioClip backgroundAudio;
+    [SerializeField] public AudioClip[] backgroundAudios;
+    [SerializeField] public AudioClip slidingAudio;
 
     private void Awake()
     {
@@ -74,6 +75,7 @@ public class CharacterController : MonoBehaviour
         _animator = gameObject.GetComponent<Animator>();
         _meleeHitBoxLoc = gameObject.transform.Find("WeaponHitBox");
         _characterState = CharacterState.Normal;
+        AudioManager.Instance.PlayRandomMusic(this.backgroundAudios);
         _canMove = true;
         _renderer = gameObject.GetComponent<Renderer>();
     }
@@ -98,8 +100,8 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
+        HandleBackgroundMusic();
+
         HandleDiagonalDirection();
         if (_animator && _canChangeVelocity)
         {
@@ -141,6 +143,7 @@ public class CharacterController : MonoBehaviour
         {
             if (_dashCooldown <= 0)
             {
+                AudioManager.Instance.PlayEffect(this.slidingAudio);
                 StartCoroutine(Dash());
             }
         }
@@ -291,7 +294,8 @@ public class CharacterController : MonoBehaviour
         _rigidbody2D.velocity = _lastInputVector * DashMagnitude;
         yield return new WaitForSeconds(DashDuration);
         _characterState = CharacterState.Normal;
-       
+
+
         if (_animator)
         {
             _animator.SetBool("Sliding", false);
@@ -332,6 +336,12 @@ public class CharacterController : MonoBehaviour
         if (PlayerHUD)
         {
             PlayerHUD.SnowballText.text = _gatherer.NumSnowballs().ToString();
+        }
+    }
+
+    private void HandleBackgroundMusic() {
+        if(!AudioManager.Instance.IsPlayingMusic()) {
+            AudioManager.Instance.PlayRandomMusic(backgroundAudios);
         }
     }
 }

@@ -37,6 +37,8 @@ public class ForestAnimal : MonoBehaviour
     protected Vector2 _lastInputVector;
     
 
+    [SerializeField] public AudioClip alertAudio;
+
     private void Awake()
     {
         _attacker = this.gameObject.GetComponent<MeleeAttacker>();
@@ -179,6 +181,7 @@ public class ForestAnimal : MonoBehaviour
         if (col.gameObject.tag == "Player" && ChasesPlayer)
         {
             _target = col.gameObject.transform;
+            AudioManager.Instance.PlayEffect(this.alertAudio);
             if (HasStandingAnim)
             {
                 StartCoroutine(Stand());

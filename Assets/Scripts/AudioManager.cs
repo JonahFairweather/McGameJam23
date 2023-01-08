@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
+
 public class AudioManager : MonoBehaviour {
     // singelton instance
     public static AudioManager Instance = null;
@@ -13,14 +14,13 @@ public class AudioManager : MonoBehaviour {
 
 	private float lowPitchRange = .95f;
 	private float highPitchRange = 1.05f;
-    private float fadeOutDuration = 1.0f;
-    private bool musicStopped = true;
+    private float fadeOutDuration = 3f;
 
     private void Awake() { 
         if (Instance == null) {
             Instance = this;
         } else if (Instance != this) {
-            GameObject.Destroy(this.gameObject);
+            GameObject.Destroy(gameObject);
         }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -39,40 +39,43 @@ public class AudioManager : MonoBehaviour {
 
     // play the given audio clip through the music source
     public void PlayMusic(AudioClip clip) {
-        // spin until previous music is faded out
-        StartCoroutine(FadeOutMusic());
-        while (this.musicStopped);
-
-        // play new music
         MusicSource.clip = clip;
-        MusicSource.Play();
-        this.musicStopped = false;
+        StartCoroutine(FadeOutMusic());
     }
 
-    // play a random audio clip from an array of audio clips and randomize the pitch slightly 
-    public void RandomSoundEffect(params AudioClip[] clips) {
+    // play a random audio clip from an array of audio clips and randomize the pitch slightly. Plays through the effects source 
+    public void PlayRandomEffect(params AudioClip[] clips) {
         int randomIndex = Random.Range(0, clips.Length);
 		float randomPitch = Random.Range(lowPitchRange, highPitchRange);
 		EffectsSource.pitch = randomPitch;
-		EffectsSource.clip = clips[randomIndex];
-		EffectsSource.Play();
+		EffectsSource.PlayOneShot(clips[randomIndex]);
+    }
+
+    // play a random audio clip from an array of audio clips and randomize the pitch slightly. Plays through the music source
+    public void PlayRandomMusic(params AudioClip[] clips) {
+        int randomIndex = Random.Range(0, clips.Length);
+		MusicSource.clip = clips[randomIndex];
+		StartCoroutine(FadeOutMusic());
     }
 
     IEnumerator FadeOutMusic() {
         // Check Music Volume and Fade Out
-        while (MusicSource.volume > 0.01f)
-        {
-            MusicSource.volume -= Time.deltaTime / fadeOutDuration;
+        while (MusicSource.volume > 0.01f) {
+            MusicSource.volume -= Time.fixedDeltaTime / fadeOutDuration;
             yield return null;
         }
 
-        // Make sure volume is set to 0
-        MusicSource.volume = 0;
-
         // Stop Music
         MusicSource.Stop();
-        this.musicStopped = true;
+
+        // play new music
+        MusicSource.volume = 1;
+        MusicSource.Play();
+
+        yield break;
     }
 
-
+    public bool IsPlayingMusic() {
+        return MusicSource.isPlaying;
+    }
 }
