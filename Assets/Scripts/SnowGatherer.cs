@@ -45,11 +45,17 @@ public class SnowGatherer : MonoBehaviour
         return CurrentSnowballs > 0 && _cooldown <= 0;
     }
 
+    public bool CanThrow()
+    {
+        return CurrentSnowballs > 0 && _cooldown <= 0;
+    }
+
     public IEnumerator StartThrow(Vector3 MouseWorldPos)
     {
         _animator?.SetTrigger("ThrowSnowball");
         _character.SetAttacking(true);
-        ThrowDir = MouseWorldPos - SpawnLocation.position;
+        ThrowDir = MouseWorldPos - SpawnLocation.localPosition;
+        Debug.Log(ThrowDir.ToString());
         yield return new WaitForSeconds(TimeBeforeThrow);
         Throw(MouseWorldPos);
     }

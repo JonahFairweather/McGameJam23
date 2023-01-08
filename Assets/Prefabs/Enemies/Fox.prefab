@@ -186,7 +186,7 @@ MonoBehaviour:
   InitialHealth: 100
   DestroyOnDeath: 1
   DestructionDelaay: 2
-  InstantiateOnDeath: {fileID: 0}
+  InstantiateOnDeath: {fileID: 6584984457499639043, guid: be43806d7e2cd8b4f8aa803f1d0bba12, type: 3}
   FlashOnDamage: 1
   DamageFlash:
     serializedVersion: 2
@@ -220,6 +220,7 @@ MonoBehaviour:
   FlashDuration: 1
   deathAudio: {fileID: 8300000, guid: fb9e8e1985a3e4fc0854f62b1e9dd736, type: 3}
   damageAudio: {fileID: 8300000, guid: 8f30cdc30edcd422abc5336f8f2c70ed, type: 3}
+  gameOverMenu: {fileID: 0}
 --- !u!58 &982504253356788338
 CircleCollider2D:
   m_ObjectHideFlags: 0

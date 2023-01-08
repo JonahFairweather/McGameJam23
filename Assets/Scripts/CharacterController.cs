@@ -218,12 +218,12 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            Vector3 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (_gatherer && _gatherer.CanThrow(MousePos))
+            
+            if (_gatherer && _gatherer.CanThrow())
             {
-                StartCoroutine(_gatherer.StartThrow(MousePos));
+                StartCoroutine(_gatherer.StartThrow(_lastInputVector));
             }
         }
 
