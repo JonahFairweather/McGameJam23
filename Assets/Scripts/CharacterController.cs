@@ -140,12 +140,6 @@ public class CharacterController : MonoBehaviour
             PollAudioInstance();
         }
 
-        if (AudioManager.Instance != null)
-        {
-            HandleBackgroundMusic();
-        }
-        
-
         if(!_disabled) HandleDiagonalDirection();
         if (_animator && _canChangeVelocity)
         {
@@ -252,6 +246,11 @@ public class CharacterController : MonoBehaviour
                 _gatherer.GatherSnow();
                 
             }
+        }
+
+        if (AudioManager.Instance != null)
+        {
+            HandleBackgroundMusic();
         }
     }
     

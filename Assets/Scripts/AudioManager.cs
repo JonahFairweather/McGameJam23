@@ -40,7 +40,7 @@ public class AudioManager : MonoBehaviour {
     // play the given audio clip through the music source
     public void PlayMusic(AudioClip clip) {
         MusicSource.clip = clip;
-        StartCoroutine(FadeOutMusic());
+        this.MusicSource.Play();
     }
 
     // play a random audio clip from an array of audio clips and randomize the pitch slightly. Plays through the effects source 
@@ -56,23 +56,6 @@ public class AudioManager : MonoBehaviour {
         int randomIndex = Random.Range(0, clips.Length);
 		MusicSource.clip = clips[randomIndex];
 		StartCoroutine(FadeOutMusic());
-    }
-
-    IEnumerator FadeOutMusic() {
-        // Check Music Volume and Fade Out
-        while (MusicSource.volume > 0.01f) {
-            MusicSource.volume -= Time.fixedDeltaTime / fadeOutDuration;
-            yield return null;
-        }
-
-        // Stop Music
-        MusicSource.Stop();
-
-        // play new music
-        MusicSource.volume = 1;
-        MusicSource.Play();
-
-        yield break;
     }
 
     public bool IsPlayingMusic() {

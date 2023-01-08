@@ -34,7 +34,6 @@ public class PauseMenu : MonoBehaviour {
 
     public void Restart() {
         Scene currScene = SceneManager.GetActiveScene();
-        // SceneManager.LoadScene(currScene.name);
         Time.timeScale = 1f;
         this.sceneTransition.LoadNewScene(currScene.name);
     }

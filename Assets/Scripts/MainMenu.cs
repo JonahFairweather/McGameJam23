@@ -12,15 +12,38 @@ public class MainMenu : MonoBehaviour {
 
     [SerializeField] public SceneTransition sceneTransition;
 
+    private bool _polledAudioInstance;
+
     // Start is called before the first frame update
     void Start() {
         this.howToPlayScreen.SetActive(false);
         this.settingsScreen.SetActive(false);
-        AudioManager.Instance.PlayMusic(this.backgroundAudio);
+        // AudioManager.Instance.PlayMusic(this.backgroundAudio);
     }
 
     // Update is called once per frame
     void Update() {
+        if (!_polledAudioInstance)
+        {
+            PollAudioInstance();
+        }
+
+        HandleBackgroundMusic();
+    }
+
+    void PollAudioInstance()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic(this.backgroundAudio);
+            _polledAudioInstance = true;
+        }
+    }
+
+    private void HandleBackgroundMusic() {
+        if(!AudioManager.Instance.IsPlayingMusic()) {
+            AudioManager.Instance.PlayMusic(backgroundAudio);
+        }
     }
 
     public void StartGame() {
