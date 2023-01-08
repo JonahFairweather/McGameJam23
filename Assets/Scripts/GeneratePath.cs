@@ -69,8 +69,12 @@ public class GeneratePath : MonoBehaviour
                 {
                     SpawnPenguinFamily();
                 }
-                Debug.Log(YThreshold);
-                GenerateStuffs(YThreshold + 50);
+
+                if (!(YThreshold + 60 >= PositiveYMax))
+                {
+                    GenerateStuffs(YThreshold + 50);
+                }
+                
             }
         }
     }
@@ -83,12 +87,13 @@ public class GeneratePath : MonoBehaviour
     private IEnumerator SpawnFamily()
     {
 
-        float x = Random.Range(-100, 100);
-        float y = Random.Range(PositiveYMax, PositiveYMax + 10);
+        
         for (int i = 0; i < 20; i++)
         {
             for (int j = 0; j < 10; j++)
             {
+                float x = Random.Range(-100, 100);
+                float y = Random.Range(PositiveYMax, PositiveYMax + 10);
                 Vector3 Loc = new Vector3(x, y, 0);
                 GameObject g = Instantiate(PenguinToSpawn, Loc, Quaternion.identity);
                 if (g != null)
@@ -120,9 +125,11 @@ public class GeneratePath : MonoBehaviour
                     Origin.z = 0;
                     int rdm = Random.Range(0, _animals.Count);
                     GameObject newGameObj = Instantiate<GameObject>(_animals[rdm].gameObject, Origin, Quaternion.identity);
+                    Debug.Log(_spawnedAnimals);
                     _spawnedAnimals.Enqueue(newGameObj);
                     
                     GameObject lastAnimal = _spawnedAnimals.Dequeue();
+                    Debug.Log(lastAnimal.transform.position.y);
                     
                     Destroy(lastAnimal);
                     SetLayerBasedOnYValue(newGameObj);
@@ -159,6 +166,8 @@ public class GeneratePath : MonoBehaviour
                 {
                     lastForest = _forestObjects.Dequeue();
                 }
+                Debug.Log(lastForest.transform.position.y);
+                Destroy(lastForest);
             }
 
             casts++;
@@ -184,6 +193,7 @@ public class GeneratePath : MonoBehaviour
                 {
                     lastSnow = _forestObjects.Dequeue();
                 }
+                Destroy(lastSnow);
             }
 
             casts++;
@@ -238,7 +248,7 @@ public class GeneratePath : MonoBehaviour
                     GameObject newGameObj = Instantiate<GameObject>(ForestFolliage[rdm].gameObject, Origin, Quaternion.identity);
                     if (newGameObj != null)
                     {
-                        Debug.Log(_forestObjects);
+                        
                         _forestObjects.Enqueue(newGameObj);
                         SetLayerBasedOnYValue(newGameObj);
                         newGameObj.transform.parent = this.gameObject.transform;

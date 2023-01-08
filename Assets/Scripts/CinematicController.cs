@@ -72,6 +72,7 @@ public class CinematicController : MonoBehaviour
         while (i < SpriteList.Count)
         {
             _spriteRenderer.sprite = SpriteList[i];
+            
             i++;
             yield return new WaitForSecondsRealtime(timeperframe);
         }
