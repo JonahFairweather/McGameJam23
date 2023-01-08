@@ -12,6 +12,9 @@ public class Snowball : MonoBehaviour {
     [SerializeField] private LayerMask LayersToIgnore;
     [SerializeField] private float DamageAmount = 5f;
 
+    [SerializeField] public AudioClip snowballCollisionWithAnimal;
+    [SerializeField] public AudioClip snowballCollisionWithObstacle;
+
     private CircleCollider2D _collider;
     public GameObject Owner; 
 
@@ -64,12 +67,14 @@ public class Snowball : MonoBehaviour {
     {
         if (_objectsToIgnore.Contains(other.gameObject))
         {
+            AudioManager.Instance.PlayEffect(this.snowballCollisionWithObstacle);
             return;
         }
 
         Health h = other.gameObject.GetComponent<Health>();
         if (h != null)
         {
+            AudioManager.Instance.PlayEffect(this.snowballCollisionWithAnimal);
             h.TakeDamage(DamageAmount, Owner);
         }
         GameObject.Destroy(this.gameObject);

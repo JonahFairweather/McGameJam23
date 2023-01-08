@@ -31,7 +31,8 @@ public class PauseMenu : MonoBehaviour {
     }
 
     public void Restart() {
-        // restart level
+        Scene currScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currScene.name);
     }
 
     public void Home() {

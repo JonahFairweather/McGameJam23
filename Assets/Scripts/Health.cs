@@ -15,6 +15,10 @@ public class Health : MonoBehaviour
 
     protected KnockbackTaker _knockback;
     protected bool _isDead;
+
+    [SerializeField] public AudioClip deathAudio;
+    [SerializeField] public AudioClip damageAudio;
+
     private void OnEnable()
     {
         CurrentHealth = InitialHealth;
@@ -30,8 +34,8 @@ public class Health : MonoBehaviour
         
         if (!_isDead)
         {
-            
             _knockback.TakeKnockback(gameObject.transform.position - instigator.transform.position, DmgAmt);
+            AudioManager.Instance.PlayEffect(this.damageAudio);
         }
         
     }
@@ -41,6 +45,7 @@ public class Health : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             _isDead = true;
+            AudioManager.Instance.PlayEffect(this.deathAudio);
             Kill();
         }
     }

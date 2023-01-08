@@ -1075,6 +1075,14 @@ PrefabInstance:
       propertyPath: backgroundAudio
       value: 
       objectReference: {fileID: 8300000, guid: d3e482d0457fb4923b66faeafc80cc09, type: 3}
+    - target: {fileID: 6533574284968119279, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
+      propertyPath: backgroundAudios.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533574284968119279, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
+      propertyPath: backgroundAudios.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d3e482d0457fb4923b66faeafc80cc09, type: 3}
     - target: {fileID: 6533574284968119283, guid: ba39b6d661481be4d8dfb51fe581234a, type: 3}
       propertyPath: m_Name
       value: JimboThePenguin

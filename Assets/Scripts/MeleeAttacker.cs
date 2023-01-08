@@ -24,6 +24,10 @@ public class MeleeAttacker : MonoBehaviour
     protected Animator _animator;
     protected CharacterController _character;
     protected float _attackCooldown;
+
+    [SerializeField] public AudioClip penguinPeckingAudio;
+    [SerializeField] public AudioClip enemyPeckingAudio;
+
     void Start()
     {
         
@@ -77,6 +81,11 @@ public class MeleeAttacker : MonoBehaviour
 
     private void CreateDamageBox()
     {
+        if (this.gameObject.tag == "Player") {
+            AudioManager.Instance.PlayEffect(this.penguinPeckingAudio);
+        } else {
+            AudioManager.Instance.PlayEffect(this.enemyPeckingAudio);
+        }
         Collider2D[] overlapped = Physics2D.OverlapCircleAll(DamageLocation.position, CircleRadius);
         
         foreach(Collider2D c in overlapped)

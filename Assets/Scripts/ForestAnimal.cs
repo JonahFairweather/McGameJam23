@@ -27,6 +27,8 @@ public class ForestAnimal : MonoBehaviour
     protected SpriteRenderer _renderer;
     protected Rigidbody2D _rigidbody2D;
 
+    [SerializeField] public AudioClip alertAudio;
+
     private void Awake()
     {
         _attacker = this.gameObject.GetComponent<MeleeAttacker>();
@@ -76,6 +78,7 @@ public class ForestAnimal : MonoBehaviour
         if (col.GetComponent<CharacterController>() && ChasesPlayer)
         {
             _target = col.gameObject.transform;
+            AudioManager.Instance.PlayEffect(this.alertAudio);
         }
     }
 
