@@ -26,6 +26,8 @@ public class Health : MonoBehaviour
 
     [SerializeField] public AudioClip deathAudio;
     [SerializeField] public AudioClip damageAudio;
+    [SerializeField] public PenguinDead gameOverMenu;
+    private string penguinMurderer;
 
     protected Animator _animator;
     protected CharacterMovementManager _characterMovementManager;
@@ -80,6 +82,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float DmgAmt, GameObject instigator, bool ApplyKnockback, float KnockbackMultiplier, Vector3 KnockbackDirection, float KnockbackDuration)
     {
+        this.penguinMurderer = instigator.tag;
         CurrentHealth = Mathf.Clamp(CurrentHealth - DmgAmt * GetDamageMultiplier(this.gameObject), 0, MaxHealth);
         bool wasDead = _isDead;
         CheckIfDead();
@@ -122,6 +125,10 @@ public class Health : MonoBehaviour
             _isDead = true;
             AudioManager.Instance.PlayEffect(this.deathAudio);
             Kill();
+            Debug.Log(this.penguinMurderer);
+            if (this.gameObject.tag == "Player") {
+                this.gameOverMenu.GameOver(this.penguinMurderer);
+            }
         }
     }
 
